@@ -1,0 +1,26 @@
+\documentclass[../IDP_Task5_Karwowski_Kowalewski.tex]{subfiles}
+
+\begin{document} {
+
+    \subsection{4x4 crop size} \label{results_4x4} {
+        First of all taking look at table \ref{crop_size_4.txt} and charts
+        \ref{fig:compression_4}, \ref{fig:neurons_4}, it is easy to see that PSNR value
+        increases when there is more neurons and compression ratio is lower. What is
+        very interesting dependency between PSNR and neurons number is rather
+        exponential, this state can be confirmed by the images shown in section
+        \ref{kowalewski_results_4x4}. There is a huge difference between quality of
+        images with small number of neurons - 3, 6, 9 but when we take a look at
+        images with big number of neurons - 60, 70, 80, 90, 100 the different is really
+        small, it can be said that there is not difference for human eyes.
+    }
+
+    \subsection{8x8 crop size} \label{results_8x8} {
+        The overall results are quite the same as described in section
+        \ref{results_4x4} but in this case this requires more neurons to achieve the
+        same results. What is more clustering image pixel space using 8x8 crop size
+        takes much longer than in 4x4 case. Comparing results achieved for 100 neurons
+        PSNR is higher for 4x4 that 8x8 which implies better results for 4x4 using the
+        same number of neurons.
+    }
+}
+\end{document}

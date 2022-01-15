@@ -1,0 +1,315 @@
+\documentclass[../EDI_Task3_Karwowski_Kowalewski.tex]{subfiles}
+
+\begin{document} {
+
+    Do przeprowadzenie poniższych eksperymentów został wygenerowany losowy użytkownik i
+    był użyty w niezmienionej formie we wszystkich eksperymentach. Został on
+    przedstawiony poniżej:
+
+% @formatter:off
+    \begin{lstlisting}
+False, False, False, False, False, False, True, False, True, True,
+False, False, True, True, True, True, True, False, False, False,
+True, True, False, False, True, False, False, True, True, False,
+False, False, False, True, True, False
+    \end{lstlisting}
+% @formatter:on
+
+    \subsection{4 klastry}
+    \label{results_k_4} {
+
+    % @formatter:off
+        \begin{table}[!htbp]
+            \scriptsize
+            \centering
+            \begin{tabular}{|c|c|c|c|c|}
+                \hline
+                Klaster 0 & Klaster 1 & Klaster 2 & Klaster 3 \\ \hline
+                  True   &   False   &   False   &   False \\
+                 False   &   False   &    True   &   False \\
+                 False   &   False   &   False   &   False \\
+                 False   &   False   &   False   &   False \\
+                 False   &   False   &   False   &   False \\
+                 False   &   False   &   False   &   False \\
+                 False   &   False   &   False   &   False \\
+                 False   &   False   &   False   &   False \\
+                  True   &   False   &   False   &   False \\
+                  True   &   False   &   False   &   False \\
+                 False   &   False   &   False   &    True \\
+                 False   &   False   &   False   &   False \\
+                 False   &   False   &   False   &   False \\
+                 False   &   False   &   False   &   False \\
+                 False   &   False   &   False   &   False \\
+                 False   &   False   &   False   &   False \\
+                 False   &   False   &   False   &   False \\
+                 False   &   False   &   False   &   False \\
+                 False   &   False   &   False   &   False \\
+                 False   &   False   &   False   &   False \\
+                 False   &   False   &   False   &   False \\
+                 False   &   False   &   False   &   False \\
+                 False   &   False   &   False   &   False \\
+                 False   &   False   &   False   &   False \\
+                 False   &   False   &   False   &   False \\
+                 False   &   False   &   False   &   False \\
+                 False   &   False   &   False   &   False \\
+                 False   &   False   &   False   &   False \\
+                 False   &   False   &   False   &   False \\
+                 False   &   False   &   False   &   False \\
+                 False   &   False   &   False   &   False \\
+                 False   &   False   &   False   &   False \\
+                 False   &   False   &   False   &   False \\
+                 False   &   False   &   False   &   False \\
+                 False   &   False   &   False   &   False \\
+                 False   &   False   &   False   &   False \\ \hline
+            \end{tabular}
+            \caption{Centroidy dla 4 klastrów z flagami stron użytkowników}
+%            \label{}
+        \end{table}
+    % @formatter:on
+
+        \begin{table}[!htbp]
+            \small
+            \centering
+            \begin{tabular}{|c|c|c|}
+                \hline
+                Klaster & Liczba obserwacji & Procent obserwacji \\ \hline
+                0 & 294 & 4\% \\
+                1 & 6158 & 77\% \\
+                2 & 1218 & 15\% \\
+                3 & 336 & 4\% \\ \hline
+            \end{tabular}
+            \caption{Wyniki analizy skupień dla 4 klastrów}
+%            \label{}
+        \end{table}
+
+        \begin{table}[!htbp]
+            \small
+            \centering
+            \begin{tabular}{|c|c|}
+                \hline
+                Klaster & Współczynnik Jaccarda \\ \hline
+                0 & \textbf{0.125} \\
+                1 & 0.0 \\
+                2 & 0.0 \\
+                3 & 0.0 \\ \hline
+            \end{tabular}
+            \caption{Wartości współczynnika podobieństwa Jaccarda}
+            \label{coeffcient_5}
+        \end{table}
+        \FloatBarrier
+
+        Po dokonaniu analizy została uzyskana informacja, że najlepiej dopasowanym
+        klasterem jest klaster numer 0 z wartością współczynnika podobieństwa Jaccarda
+        na poziomie 0.125 co zostało przedstawione w tabeli \ref{coeffcient_5}. W tym
+        przypadku system dokonał rekomendacji następującej strony:
+        \begin{itemize}
+            \item \textbf{/ksc.html}
+        \end{itemize}
+
+    }
+
+    \subsection{7 klastrów}
+    \label{results_k_7} {
+
+    % @formatter:off
+        \begin{table}[!htbp]
+            \scriptsize
+            \centering
+            \begin{tabular}{|c|c|c|c|c|c|c|}
+                \hline
+                Klaster 0 & Klaster 1 & Klaster 2 & Klaster 3 & Klaster 4 & Klaster 5 & Klaster 6 \\ \hline
+                False   &   False   &   False   &   False   &    True   &   False   &   False \\
+                False   &   False   &    True   &   False   &   False   &   False   &   False \\
+                False   &   False   &   False   &   False   &   False   &    True   &   False \\
+                False   &    True   &   False   &   False   &   False   &   False   &   False \\
+                False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                 True   &   False   &   False   &   False   &   False   &   False   &   False \\
+                 True   &   False   &   False   &   False   &   False   &   False   &   False \\
+                 True   &   False   &   False   &    True   &   False   &   False   &   False \\
+                False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                False   &   False   &   False   &   False   &   False   &   False   &   False \\ \hline
+            \end{tabular}
+            \caption{Centroidy dla 7 klastrów z flagami stron użytkowników}
+%            \label{}
+        \end{table}
+    % @formatter:on
+
+        \begin{table}[!htbp]
+            \small
+            \centering
+            \begin{tabular}{|c|c|c|}
+                \hline
+                Klaster & Liczba obserwacji & Procent obserwacji \\ \hline
+                0 & 305 & 4\% \\
+                1 & 1002 & 13\% \\
+                2 & 1066 & 13\% \\
+                3 & 246 & 3\% \\
+                4 & 1208 & 15\% \\
+                5 & 754 & 9\% \\
+                6 & 3425 & 43\% \\ \hline
+            \end{tabular}
+            \caption{Wyniki analizy skupień dla 7 klastrów}
+%            \label{}
+        \end{table}
+
+        \begin{table}[!htbp]
+            \small
+            \centering
+            \begin{tabular}{|c|c|}
+                \hline
+                Klaster & Współczynnik Jaccarda \\ \hline
+                0 & \textbf{0.125} \\
+                1 & 0.0 \\
+                2 & 0.0 \\
+                3 & 0.0 \\
+                4 & 0.0 \\
+                5 & 0.0 \\
+                6 & 0.0 \\ \hline
+            \end{tabular}
+            \caption{Wartości współczynnika podobieństwa Jaccarda}
+            \label{coeffcient_7}
+        \end{table}
+        \FloatBarrier
+
+        Po dokonaniu analizy została uzyskana informacja, że najlepiej dopasowanym
+        klasterem jest klaster numer 0 z wartością współczynnika podobieństwa Jaccarda
+        na poziomie 0.125 co zostało przedstawione w tabeli \ref{coeffcient_7}. W tym
+        przypadku system dokonał rekomendacji następującej strony:
+        \begin{itemize}
+            \item \textbf{/history/apollo/apollo-13/apollo-13.html}
+        \end{itemize}
+
+    }
+
+    \subsection{10 klastrów}
+    \label{results_k_10} {
+
+    % @formatter:off
+        \begin{table}[!htbp]
+            \scriptsize
+            \centering
+            \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+                \hline
+                Klaster 0 & Klaster 1 & Klaster 2 & Klaster 3 & Klaster 4 & Klaster 5 & Klaster 6 & Klaster 7 & Klaster 8 & Klaster 9 \\ \hline
+                 True   &   False   &   False   &   False   &    True   &   False   &   False   &   False   &   False   &   False \\
+                False   &   False   &    True   &   False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                False   &   False   &   False   &   False   &   False   &    True   &   False   &   False   &    True   &   False \\
+                False   &    True   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                False   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &    True \\
+                False   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                False   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                False   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                 True   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                 True   &   False   &   False   &   False   &   False   &   False   &   False   &    True   &   False   &   False \\
+                 True   &   False   &   False   &    True   &   False   &   False   &   False   &   False   &   False   &   False \\
+                False   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                False   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &    True   &   False \\
+                False   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                False   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                False   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                False   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                False   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                False   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                False   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                False   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                False   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                False   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                False   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                False   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                False   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                False   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                False   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                False   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &    True \\
+                False   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                False   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                False   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                False   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                False   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                False   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                False   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &   False   &   False \\ \hline
+            \end{tabular}
+            \caption{Centroidy dla 10 klastrów z flagami stron użytkowników}
+%            \label{}
+        \end{table}
+    % @formatter:on
+
+        \begin{table}[!htbp]
+            \small
+            \centering
+            \begin{tabular}{|c|c|c|}
+                \hline
+                Klaster & Liczba obserwacji & Procent obserwacji \\ \hline
+                0 & 146 & 2\% \\
+                1 & 991 & 12\% \\
+                2 & 1060 & 13\% \\
+                3 & 325 & 4\% \\
+                4 & 1161 & 15\% \\
+                5 & 657 & 8\% \\
+                6 & 3232 & 40\% \\
+                7 & 169 & 2\% \\
+                8 & 147 & 2\% \\
+                9 & 118 & 1\% \\ \hline
+            \end{tabular}
+            \caption{Wyniki analizy skupień dla 10 klastrów}
+%            \label{}
+        \end{table}
+
+        \begin{table}[!htbp]
+            \small
+            \centering
+            \begin{tabular}{|c|c|}
+                \hline
+                Klaster & Współczynnik Jaccarda \\ \hline
+                0 & 0.1176 \\
+                1 & 0.0 \\
+                2 & 0.0 \\
+                3 & 0.0 \\
+                4 & 0.0 \\
+                5 & 0.0 \\
+                6 & 0.0 \\
+                7 & 0.0667 \\
+                8 & 0.0625 \\
+                9 & 0.0625 \\ \hline
+            \end{tabular}
+            \caption{Wartości współczynnika podobieństwa Jaccarda}
+            \label{coeffcient_10}
+        \end{table}
+        \FloatBarrier
+
+        Po dokonaniu analizy została uzyskana informacja, że najlepiej dopasowanym
+        klasterem jest klaster numer 0 z wartością współczynnika podobieństwa Jaccarda
+        na poziomie 0.1176 co zostało przedstawione w tabeli \ref{coeffcient_10}. W tym
+        przypadku system dokonał rekomendacji następujących stron:
+        \begin{itemize}
+            \item \textbf{/ksc.html}
+            \item \textbf{/history/apollo/apollo-13/apollo-13.html}
+        \end{itemize}
+    }
+}
+\end{document}

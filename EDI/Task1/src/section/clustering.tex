@@ -1,0 +1,433 @@
+\documentclass[../EDI_Task1_Karwowski_Kowalewski.tex]{subfiles}
+
+\begin{document} {
+
+    Do przeprowadzanie analizy klastrowej został wybrany algorytm \textit{K-średnich}
+    (ang. K-Means), którego działanie polega na utworzeniu \textit{K} klastrów
+    poprzez losowe wybranie \textit{K} środków skupień - przypadków możliwie jak
+    najbardziej od siebie oddalonych. W kolejnych iteracjach przypisuje obiekty do
+    najbliższych skupień biorąc pod uwagę odległość od ich środków. Sama
+    \textit{odległość} jest obliczana na podstawie metryki np. Euklidesowej czy też
+    Czebyszewa. Parametrem, który ulegał zmianie był \textbf{numClusters}.
+
+    Dla plików sesji z argumentami numerycznymi o nazwie
+    \textit{extracted\_sessions\_numeric.arff}, dla plików sesji z atrybutami
+    flagowymi o nazwie \textit{extracted\_sessions\_pages.arff} oraz dla plików z
+    użytkownikami i flagami odwiedzonych stron o nazwie
+    \textit{extracted\_user\_pages.arff} został uruchomiony wcześniej wspomniany
+    algorytm dla parametru \textit{K=3} oraz \textit{K=6}.
+
+    \subsection{Użytkownicy} {
+
+        \subsubsection{3 klastry}
+        \label{sec:user_k_3} {
+
+            Do uzyskania wyników wymagane było 5 iteracji natomiast suma błędów
+            kwadratowych wynosiła 11524.0.
+            \begin{table}[!htbp]
+                \footnotesize
+                \centering
+                \begin{tabular}{|l|c|c|c|c|}
+                    \hline
+                    Attribute                                         & Full Data   &       0   &       1   &       2 \\ \hline
+                    /ksc.html                                         &     False   &   False   &   False   &   False \\
+                    /                                                 &     False   &   False   &   False   &    True \\
+                    /shuttle/countdown/                               &     False   &   False   &   False   &   False \\
+                    /shuttle/missions/missions.html                   &     False   &   False   &   False   &   False \\
+                    /shuttle/missions/sts-69/mission-sts-69.html      &     False   &   False   &   False   &   False \\
+                    /htbin/cdt\_main.pl                                &     False   &   False   &   False   &   False \\
+                    /finance/main.htm                                 &     False   &   False   &   False   &   False \\
+                    /shuttle/countdown/liftoff.html                   &     False   &   False   &   False   &   False \\
+                    /history/history.html                             &     False   &    True   &   False   &   False \\
+                    /history/apollo/apollo.html                       &     False   &    True   &   False   &   False \\
+                    /history/apollo/apollo-13/apollo-13.html          &     False   &    True   &   False   &   False \\
+                    /shuttle/missions/sts-70/mission-sts-70.html      &     False   &   False   &   False   &   False \\
+                    /shuttle/missions/sts-71/mission-sts-71.html      &     False   &   False   &   False   &   False \\
+                    /shuttle/missions/sts-71/images/images.html       &     False   &   False   &   False   &   False \\
+                    /shuttle/technology/sts-newsref/stsref-toc.html   &     False   &   False   &   False   &   False \\
+                    /htbin/cdt\_clock.pl                               &     False   &   False   &   False   &   False \\
+                    /shuttle/countdown/countdown.html                 &     False   &   False   &   False   &   False \\
+                    /facilities/lc39a.html                            &     False   &   False   &   False   &   False \\
+                    /shuttle/missions/sts-70/images/images.html       &     False   &   False   &   False   &   False \\
+                    /history/apollo/apollo-13/apollo-13-info.html     &     False   &   False   &   False   &   False \\
+                    /procurement/procurement.html                     &     False   &   False   &   False   &   False \\
+                    /shuttle/missions/sts-71/movies/movies.html       &     False   &   False   &   False   &   False \\
+                    /shuttle/technology/sts-newsref/sts\_asm.html      &     False   &   False   &   False   &   False \\
+                    /history/apollo/apollo-11/apollo-11.html          &     False   &   False   &   False   &   False \\
+                    /facts/faq04.html                                 &     False   &   False   &   False   &   False \\
+                    /htbin/wais.pl                                    &     False   &   False   &   False   &   False \\
+                    /shuttle/missions/sts-70/movies/movies.html       &     False   &   False   &   False   &   False \\
+                    /images/                                          &     False   &   False   &   False   &   False \\
+                    /shuttle/resources/orbiters/endeavour.html        &     False   &   False   &   False   &   False \\
+                    /shuttle/missions/sts-73/mission-sts-73.html      &     False   &   False   &   False   &   False \\
+                    /whats-new.html                                   &     False   &   False   &   False   &   False \\
+                    /software/winvn/winvn.html                        &     False   &   False   &   False   &   False \\
+                    /facilities/tour.html                             &     False   &   False   &   False   &   False \\
+                    /elv/elvpage.htm                                  &     False   &   False   &   False   &   False \\
+                    /shuttle/missions/sts-69/images/images.html       &     False   &   False   &   False   &   False \\
+                    /shuttle/countdown/lps/fr.html                    &     False   &   False   &   False   &   False \\ \hline
+                \end{tabular}
+                \caption
+                {Centroidy dla 3 klastrów ze wszystkimi flagami dla analizy użytkowników}
+                \label{user_k_3}
+            \end{table}
+
+            \begin{table}[!htbp]
+                \footnotesize
+                \centering
+                \begin{tabular}{|c|c|c|}
+                    \hline
+                    Klaster & Liczba obserwacji & Procent obserwacji \\ \hline
+                    0     &  305 &  4\% \\
+                    1     & 6478 & 81\% \\
+                    2     & 1223 & 15\% \\ \hline
+                \end{tabular}
+                \caption
+                {Obserwacje dla 3 klastrów ze wszystkimi flagami dla analizy użytkowników}
+                \label{stats_users_k_3}
+            \end{table}
+            \FloatBarrier
+
+            Na podstawie wyników w tej sekcji można zauważyć i wnioskować, że
+            ponad 80\%użytkowników zostało przypisanych do klastra, który nie zawiera
+            najczęściej odwiedzane strony. Jeśli chodzi o porównanie błedu
+            średniokwadratowego dla dla użytkowników i sesji z atrybutami flagowymi
+            dla klasteryzacji z parametrem \textit{K=3}to można stwierdzić, że
+            zarówno w przypadku sesji jak i użytkowników były duże różnice między
+            poszczególnymi rekordami.
+        }
+
+        \subsubsection{6 klastrów} {
+
+            Do uzyskania wyników wymagane było 5 iteracji natomiast suma błędów
+            kwadratowych wynosiła 10024.0.
+            \begin{table}[!htbp]
+                \footnotesize
+                \centering
+                \begin{tabular}{|l|c|c|c|c|c|c|c|}
+                    \hline
+                    Attribute                                        &  Full Data   &       0   &       1   &       2   &       3   &       4   &       5 \\ \hline
+                    /ksc.html                                        &      False   &    True   &   False   &   False   &   False   &    True   &   False \\
+                    /                                                &      False   &   False   &   False   &    True   &   False   &   False   &   False \\
+                    /shuttle/countdown/                              &      False   &   False   &   False   &   False   &   False   &   False   &    True \\
+                    /shuttle/missions/missions.html                  &      False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                    /shuttle/missions/sts-69/mission-sts-69.html     &      False   &   False   &   False   &   False   &   False   &    True   &   False \\
+                    /htbin/cdt\_main.pl                               &      False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                    /finance/main.htm                                &      False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                    /shuttle/countdown/liftoff.html                  &      False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                    /history/history.html                            &      False   &    True   &   False   &   False   &   False   &   False   &   False \\
+                    /history/apollo/apollo.html                      &      False   &    True   &   False   &   False   &   False   &   False   &   False \\
+                    /history/apollo/apollo-13/apollo-13.html         &      False   &   False   &   False   &   False   &    True   &   False   &   False \\
+                    /shuttle/missions/sts-70/mission-sts-70.html     &      False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                    /shuttle/missions/sts-71/mission-sts-71.html     &      False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                    /shuttle/missions/sts-71/images/images.html      &      False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                    /shuttle/technology/sts-newsref/stsref-toc.html  &      False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                    /htbin/cdt\_clock.pl                              &      False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                    /shuttle/countdown/countdown.html                &      False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                    /facilities/lc39a.html                           &      False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                    /shuttle/missions/sts-70/images/images.html      &      False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                    /history/apollo/apollo-13/apollo-13-info.html    &      False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                    /procurement/procurement.html                    &      False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                    /shuttle/missions/sts-71/movies/movies.html      &      False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                    /shuttle/technology/sts-newsref/sts\_asm.html     &      False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                    /history/apollo/apollo-11/apollo-11.html         &      False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                    /facts/faq04.html                                &      False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                    /htbin/wais.pl                                   &      False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                    /shuttle/missions/sts-70/movies/movies.html      &      False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                    /images/                                         &      False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                    /shuttle/resources/orbiters/endeavour.html       &      False   &   False   &   False   &   False   &   False   &    True   &   False \\
+                    /shuttle/missions/sts-73/mission-sts-73.html     &      False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                    /whats-new.html                                  &      False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                    /software/winvn/winvn.html                       &      False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                    /facilities/tour.html                            &      False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                    /elv/elvpage.htm                                 &      False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                    /shuttle/missions/sts-69/images/images.html      &      False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                    /shuttle/countdown/lps/fr.html                   &      False   &   False   &   False   &   False   &   False   &   False   &   False \\ \hline
+                \end{tabular}
+                \caption
+                {Centroidy dla 6 klastrów ze wszystkimi flagami dla analizy użytkowników}
+                \label{user_k_6}
+            \end{table}
+
+            \begin{table}[!htbp]
+                \footnotesize
+                \centering
+                \begin{tabular}{|c|c|c|}
+                    \hline
+                    Klaster & Liczba obserwacji & Procent obserwacji \\ \hline
+                    0   &    291 &  4\% \\
+                    1   &   4976 & 62\% \\
+                    2   &   1217 & 15\% \\
+                    3   &    336 &  4\% \\
+                    4   &    192 &  2\% \\
+                    5   &    994 & 12\% \\ \hline
+                \end{tabular}
+                \caption
+                {Obserwacje dla 6 klastrów ze wszystkimi flagami dla analizy użytkowników}
+                \label{stats_users_k_6}
+            \end{table}
+            \FloatBarrier
+
+            Na podstawie wyników w tej sekcji można zauważyć i wnioskować, że
+            wyniki są zbliżone do tych przestawionych w sekcji \ref{sec:user_k_3}
+            gdyż aż 62\% użytkowników została przypisana do klastra, który nie zawiera
+            najczęściej odwiedzane strony, kolejne co do liczności klastry czyli
+            numer 2 oraz 5 zawierają po jednej często odwiedzanej stronie stąd
+            można wnioskować, że wyniki w przypadku parametru \textit{K=3} oraz
+            \textit{K=6} są bardzo zbliżone, jedynie w drugim przypadku omawianym w
+            tej sekcji mogą być bardziej dokładnie, mnie zgeneralizone. Pozostałem
+            klastry mają bardzo mały udział na poziomie od 2\% do 4 \% więc można
+            się pokusić o stwierdzenie, że nie odgrywają bardzo ważnej roli.
+        }
+    }
+
+    \subsection{Sesje - Atrybuty numeryczne} {
+
+        \subsubsection{3 klastry}
+        \label{sec:session_k_3} {
+
+            Do uzyskania wyników wymagane było 12 iteracji natomiast suma błędów
+            kwadratowych wynosiła 65.47.
+            \begin{table}[!htbp]
+                \footnotesize
+                \centering
+                \begin{tabular}{|l|c|c|c|c|}
+                    \hline
+                    Attribute                 &  Full Data &         0  &        1  &        2 \\ \hline
+                    duration                  &   333.0765 &  536.3234  & 613.5666  & 175.2124 \\
+                    requests\_count            &     4.2622 &    2.3392  &    5.055  &   4.2404 \\
+                    average\_request\_duration  &   123.6779 &  414.8054  & 178.5414  &  50.0786 \\ \hline
+                \end{tabular}
+                \caption
+                {Centroidy dla 3 klastrów ze wszystkimi atrybutami numerycznymi dla sesji}
+                \label{sessions_num_k_3}
+            \end{table}
+
+            \begin{table}[!htbp]
+                \footnotesize
+                \centering
+                \begin{tabular}{|c|c|c|}
+                    \hline
+                    Klaster & Liczba obserwacji & Procent obserwacji \\ \hline
+                    0   &    569 & 11\% \\
+                    1   &   1472 & 27\% \\
+                    2   &   3348 & 62\% \\ \hline
+                \end{tabular}
+                \caption
+                {Obserwacje dla 3 klastrów ze wszystkimi atrybutami numerycznymi dla analizy sesji}
+                \label{stats_session_num_k_3}
+            \end{table}
+            \FloatBarrier
+
+            Na podstawie wyników w tej sekcji można zauważyć i wnioskować, że
+            najwięcej sesji zostało przypisane do klastra numer 2 i cechują sie one
+            tym, że sesja trwała najkrócej ze wszystkich oraz najkrótszym średnim
+            czasem spędzonym na stronie natomiast sama liczba zapytań była zbliżona
+            dla średniej danego zbioru.
+        }
+
+        \subsubsection{6 klastrów} {
+
+            Do uzyskania wyników wymagane było 32 iteracji natomiast suma błędów
+            kwadratowych wynosiła 29.69.
+            \begin{table}[!htbp]
+                \footnotesize
+                \centering
+                \begin{tabular}{|l|c|c|c|c|c|c|c|}
+                    \hline
+                    Attribute                 & Full Data &        0 &        1 &        2 &         3  &       4 &        5 \\ \hline
+                    duration                  &  333.0765 & 540.3118 & 538.4205 & 763.9227 & 2101.7838  & 94.6547 & 348.9662 \\
+                    requests\_count            &    4.2622 &   2.1742 &   2.9904 &   9.7778 &   25.3378  &  3.2867 &   3.4426 \\
+                    average\_request\_duration  &  123.6779 & 465.8956 & 277.4472 &  89.7244 &   95.0666  & 40.0312 & 143.6129 \\ \hline
+                \end{tabular}
+                \caption
+                {Centroidy dla 6 klastrów ze wszystkimi atrybutami numerycznymi dla sesji}
+                \label{sessions_num_k_6}
+            \end{table}
+
+            \begin{table}[!htbp]
+                \footnotesize
+                \centering
+                \begin{tabular}{|c|c|c|}
+                    \hline
+                    Klaster & Liczba obserwacji & Procent obserwacji \\ \hline
+                    0   &    356 &  7\% \\
+                    1   &    623 & 12\% \\
+                    2   &    621 & 12\% \\
+                    3   &     74 &  1\% \\
+                    4   &   2592 & 48\% \\
+                    5   &   1123 & 21\% \\ \hline
+                \end{tabular}
+                \caption
+                {Obserwacje dla 6 klastrów ze wszystkimi atrybutami numerycznymi dla analizy sesji}
+                \label{stats_session_num_k_6}
+            \end{table}
+            \FloatBarrier
+
+            Na podstawie wyników w tej sekcji można zauważyć i wnioskować, że
+            otrzymuję analogiczne wnioski jak w sekcji \ref{sec:session_k_3} czyli
+            najbardziej liczny klaster to ten, który zawiera sesji o najkrótszym
+            czasie trwania i oraz o najkrótszym spędzonym czasie na danej stronie.
+        }
+    }
+
+    \subsection{Sesje - Atrybuty flagowe} {
+
+        \subsubsection{3 klastry}
+        \label{sec:session_flag_k_3} {
+
+            Do uzyskania wyników wymagane było 3 iteracji natomiast suma błędów
+            kwadratowych wynosiła 10017.0.
+            \begin{table}[!htbp]
+                \footnotesize
+                \centering
+                \begin{tabular}{|l|c|c|c|c|}
+                    \hline
+                    Attribute                                        &  Full Data   &       0   &       1   &       2 \\ \hline
+                    /ksc.html                                        &      False   &   False   &    True   &   False \\
+                    /                                                &      False   &   False   &   False   &   False \\
+                    /shuttle/countdown/                              &      False   &   False   &   False   &   False \\
+                    /shuttle/missions/missions.html                  &      False   &   False   &   False   &    True \\
+                    /shuttle/missions/sts-69/mission-sts-69.html     &      False   &   False   &   False   &    True \\
+                    /htbin/cdt\_main.pl                               &      False   &   False   &   False   &   False \\
+                    /finance/main.htm                                &      False   &   False   &   False   &   False \\
+                    /shuttle/countdown/liftoff.html                  &      False   &   False   &   False   &   False \\
+                    /history/history.html                            &      False   &   False   &   False   &   False \\
+                    /history/apollo/apollo.html                      &      False   &   False   &   False   &   False \\
+                    /history/apollo/apollo-13/apollo-13.html         &      False   &   False   &   False   &   False \\
+                    /shuttle/missions/sts-70/mission-sts-70.html     &      False   &   False   &   False   &   False \\
+                    /shuttle/missions/sts-71/mission-sts-71.html     &      False   &   False   &   False   &   False \\
+                    /shuttle/missions/sts-71/images/images.html      &      False   &   False   &   False   &   False \\
+                    /shuttle/technology/sts-newsref/stsref-toc.html  &      False   &   False   &   False   &   False \\
+                    /htbin/cdt\_clock.pl                              &      False   &   False   &   False   &   False \\
+                    /shuttle/countdown/countdown.html                &      False   &   False   &   False   &   False \\
+                    /facilities/lc39a.html                           &      False   &   False   &   False   &   False \\
+                    /shuttle/missions/sts-70/images/images.html      &      False   &   False   &   False   &   False \\
+                    /history/apollo/apollo-13/apollo-13-info.html    &      False   &   False   &   False   &   False \\
+                    /procurement/procurement.html                    &      False   &   False   &   False   &   False \\
+                    /shuttle/missions/sts-71/movies/movies.html      &      False   &   False   &   False   &   False \\
+                    /shuttle/technology/sts-newsref/sts\_asm.html     &      False   &   False   &   False   &   False \\
+                    /history/apollo/apollo-11/apollo-11.html         &      False   &   False   &   False   &   False \\
+                    /facts/faq04.html                                &      False   &   False   &   False   &   False \\
+                    /htbin/wais.pl                                   &      False   &   False   &   False   &   False \\
+                    /shuttle/missions/sts-70/movies/movies.html      &      False   &   False   &   False   &   False \\
+                    /images/                                         &      False   &   False   &   False   &   False \\
+                    /shuttle/resources/orbiters/endeavour.html       &      False   &   False   &   False   &   False \\
+                    /shuttle/missions/sts-73/mission-sts-73.html     &      False   &   False   &   False   &   False \\
+                    /whats-new.html                                  &      False   &   False   &   False   &   False \\
+                    /software/winvn/winvn.html                       &      False   &   False   &   False   &   False \\
+                    /facilities/tour.html                            &      False   &   False   &   False   &   False \\
+                    /elv/elvpage.htm                                 &      False   &   False   &   False   &   False \\
+                    /shuttle/missions/sts-69/images/images.html      &      False   &   False   &   False   &   False \\
+                    /shuttle/countdown/lps/fr.html                   &      False   &   False   &   False   &   False \\ \hline
+                \end{tabular}
+                \caption
+                {Centroidy dla 3 klastrów ze wszystkimi flagami}
+                \label{sessions_flag_k_3}
+            \end{table}
+
+            \begin{table}[!htbp]
+                \footnotesize
+                \centering
+                \begin{tabular}{|c|c|c|}
+                    \hline
+                    Klaster & Liczba obserwacji & Procent obserwacji \\ \hline
+                    0   &   3079 & 57\% \\
+                    1   &   2044 & 38\% \\
+                    2   &    266 &  5\% \\ \hline
+                \end{tabular}
+                \caption
+                {Obserwacje dla 3 klastrów ze wszystkimi flagami stron dla analizy sesji}
+                \label{stats_session_flag_k_3}
+            \end{table}
+            \FloatBarrier
+
+            Na podstawie wyników w tej sekcji można zauważyć i wnioskować, że
+            klaster numer 0 zawiera największy odsetek sesji czyli prawie 3/5 i
+            po części analogicznie do \ref{sec:user_k_3} jest to klaster gdzie dla
+            poszczególnych stron wszystkie flagi są ustawione na wartość False.
+        }
+
+        \subsubsection{6 klastrów} {
+
+            Do uzyskania wyników wymagane było 3 iteracji natomiast suma błędów
+            kwadratowych wynosiła 8712.0.
+            \begin{table}[!htbp]
+                \footnotesize
+                \centering
+                \begin{tabular}{|l|c|c|c|c|c|c|c|}
+                    \hline
+                    Attribute                                        &  Full Data   &       0   &       1   &       2   &       3   &       4   &       5 \\ \hline
+                    /ksc.html                                        &      False   &   False   &    True   &   False   &   False   &   False   &   False \\
+                    /                                                &      False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                    /shuttle/countdown/                              &      False   &   False   &   False   &   False   &   False   &    True   &    True \\
+                    /shuttle/missions/missions.html                  &      False   &   False   &   False   &    True   &   False   &   False   &   False \\
+                    /shuttle/missions/sts-69/mission-sts-69.html     &      False   &   False   &   False   &    True   &    True   &   False   &   False \\
+                    /htbin/cdt\_main.pl                               &      False   &   False   &   False   &   False   &   False   &   False   &    True \\
+                    /finance/main.htm                                &      False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                    /shuttle/countdown/liftoff.html                  &      False   &   False   &   False   &   False   &   False   &   False   &    True \\
+                    /history/history.html                            &      False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                    /history/apollo/apollo.html                      &      False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                    /history/apollo/apollo-13/apollo-13.html         &      False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                    /shuttle/missions/sts-70/mission-sts-70.html     &      False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                    /shuttle/missions/sts-71/mission-sts-71.html     &      False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                    /shuttle/missions/sts-71/images/images.html      &      False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                    /shuttle/technology/sts-newsref/stsref-toc.html  &      False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                    /htbin/cdt\_clock.pl                              &      False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                    /shuttle/countdown/countdown.html                &      False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                    /facilities/lc39a.html                           &      False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                    /shuttle/missions/sts-70/images/images.html      &      False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                    /history/apollo/apollo-13/apollo-13-info.html    &      False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                    /procurement/procurement.html                    &      False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                    /shuttle/missions/sts-71/movies/movies.html      &      False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                    /shuttle/technology/sts-newsref/sts\_asm.html     &      False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                    /history/apollo/apollo-11/apollo-11.html         &      False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                    /facts/faq04.html                                &      False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                    /htbin/wais.pl                                   &      False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                    /shuttle/missions/sts-70/movies/movies.html      &      False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                    /images/                                         &      False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                    /shuttle/resources/orbiters/endeavour.html       &      False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                    /shuttle/missions/sts-73/mission-sts-73.html     &      False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                    /whats-new.html                                  &      False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                    /software/winvn/winvn.html                       &      False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                    /facilities/tour.html                            &      False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                    /elv/elvpage.htm                                 &      False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                    /shuttle/missions/sts-69/images/images.html      &      False   &   False   &   False   &   False   &   False   &   False   &   False \\
+                    /shuttle/countdown/lps/fr.html                   &      False   &   False   &   False   &   False   &   False   &   False   &   False \\ \hline
+                \end{tabular}
+                \caption
+                {Centroidy dla 6 klastrów ze wszystkimi flagami}
+                \label{sessions_flag_k_6}
+            \end{table}
+
+            \begin{table}[!htbp]
+                \footnotesize
+                \centering
+                \begin{tabular}{|c|c|c|}
+                    \hline
+                    Klaster & Liczba obserwacji & Procent obserwacji \\ \hline
+                    0   &   2051 & 38\% \\
+                    1   &   2000 & 37\% \\
+                    2   &    247 &  5\% \\
+                    3   &    280 &  5\% \\
+                    4   &    554 & 10\% \\
+                    5   &    257 &  5\% \\ \hline
+                \end{tabular}
+                \caption
+                {Obserwacje dla 6 klastrów ze wszystkimi flagami stron dla analizy sesji}
+                \label{stats_session_flag_k_6}
+            \end{table}
+            \FloatBarrier
+
+            Na podstawie wyników w tej sekcji można zauważyć i wnioskować, że
+            udało się uzyskać wyniki, które odbiegają od tych dotychczas
+            uzyskiwanych, w przeciwieństwie do wyników z sekcji
+            \ref{sec:session_flag_k_3} gdyż zostały wyznaczone dwa sklastry o
+            bardzo zbliżonej liczności a ich różnica wynosiła 1\%. Nie mniej pomimo
+            wyznaczenia dwóch klastrów to w przypadku klastra numer 0 wszystkie
+            flagi mają wartość False natomiast w przypadku klastra numer 1 jedyną
+            flaga, która ma wartość True jest ustawiona dla strony \textit{/ksc.html}.
+        }
+    }
+}
+\end{document}

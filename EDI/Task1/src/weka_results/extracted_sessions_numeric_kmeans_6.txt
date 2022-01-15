@@ -1,0 +1,57 @@
+=== Run information ===
+
+Scheme:       weka.clusterers.SimpleKMeans -init 0 -max-candidates 100 -periodic-pruning 10000 -min-density 2.0 -t1 -1.25 -t2 -1.0 -N 6 -A "weka.core.EuclideanDistance -R first-last" -I 500 -num-slots 1 -S 10
+Relation:     extracted_sessions_numeric
+Instances:    5389
+Attributes:   3
+              duration
+              requests_count
+              average_request_duration
+Test mode:    evaluate on training data
+
+
+=== Clustering model (full training set) ===
+
+
+kMeans
+======
+
+Number of iterations: 32
+Within cluster sum of squared errors: 29.690845146241735
+
+Initial starting points (random):
+
+Cluster 0: 391,2,391
+Cluster 1: 218,2,218
+Cluster 2: 91,3,45.5
+Cluster 3: 684,4,228
+Cluster 4: 44,2,44
+Cluster 5: 73,2,73
+
+Missing values globally replaced with mean/mode
+
+Final cluster centroids:
+                                      Cluster#
+Attribute                  Full Data         0         1         2         3         4         5
+                            (5389.0)   (356.0)   (623.0)   (621.0)    (74.0)  (2592.0)  (1123.0)
+================================================================================================
+duration                    333.0765  540.3118  538.4205  763.9227 2101.7838   94.6547  348.9662
+requests_count                4.2622    2.1742    2.9904    9.7778   25.3378    3.2867    3.4426
+average_request_duration    123.6779  465.8956  277.4472   89.7244   95.0666   40.0312  143.6129
+
+
+
+
+Time taken to build model (full training data) : 0.53 seconds
+
+=== Model and evaluation on training set ===
+
+Clustered Instances
+
+0       356 (  7%)
+1       623 ( 12%)
+2       621 ( 12%)
+3        74 (  1%)
+4      2592 ( 48%)
+5      1123 ( 21%)
+

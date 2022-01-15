@@ -1,0 +1,135 @@
+\documentclass{classrep}
+\usepackage[utf8]{inputenc}
+\frenchspacing
+
+\usepackage{graphicx}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage[hidelinks]{hyperref}
+\usepackage{lmodern}
+\usepackage{placeins}
+\usepackage{url}
+\usepackage{amsmath, amssymb, mathtools}
+\usepackage{listings}
+\usepackage{fancyhdr, lastpage}
+\usepackage{subfiles}
+\usepackage{ifthen}
+
+\pagestyle{fancyplain}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\cfoot{\thepage\ / \pageref*{LastPage}}
+
+% In order to change person, change value of variable
+\newboolean{is_karwowski}
+\setboolean{is_karwowski}{true}
+
+%--------------------------------------------------------------------------------------%
+\studycycle{Applied Information Technology, 2 cycle}
+\coursesemester{II}
+
+\coursename{Soft Computing Laboratory}
+\courseyear{2021/2022}
+
+\courseteacher{dr inż. Kamil Stokfiszewski}
+\coursegroup{Wednesday, 8:30}
+
+\author{%
+    \ifthenelse{\boolean{is_karwowski}}
+    {\studentinfo[239671@edu.p.lodz.pl]{Jan Karwowski}{239671}\\}
+    {\studentinfo[239676@edu.p.lodz.pl]{Kamil Kowalewski}{239676}\\}
+}
+
+\title{Assignment 5.: Kohonen Network for image compression}
+
+\begin{document}
+    \maketitle
+    \thispagestyle{fancyplain}
+
+    \tableofcontents
+    \newpage
+
+    \section{Main goal} \label{main_goal} {
+        The main goal of this task is to prepare implementation of Kohonen network for
+        image compression. The images themselves should use 8-bit grayscale.
+    }
+
+    \section{Theoretical background} \label{theory} {
+        Kohonen Network is a kind of self organizing map, where neurons and input values represent
+        points (vectors) in N-dimensional space. The purpose of this model is to represent or
+        reproduce shape and distribution of input values using much more lower number of points. I.e
+        this algorithm groups input values into clusters (clusterize).
+
+        Kohonen Network consists of a single layer of neurons. It is trained in unsupervised manner
+        (without labels), and the training is based on simple rule \emph{winner takes all}.  This
+        means, that for each input pattern only the most activated neuron's weights are modified.
+        Purpose of this weights change is to make the winner neuron closer (in some sens, e.g.
+        euclidean) to the input pattern.
+
+        Getting down to the possible implementation details, neuron's activation should depends on
+        \emph{distance} to input pattern. If input patterns and weights are normalized, this
+        distance (or rather similarity) could be calculated as a simple dot product. If there is no
+        normalization then euclidean distance could be used. After finding the nearest neuron
+        (winner) for the particular pattern, neuron's weights are modified according to the
+        following equation:
+        \begin{equation}
+            w_{i} = w_{i} + \eta (x_{i} - w_{i})
+        \end{equation}
+        where $w_{i}$ and $x_{i}$ are the i-th element of weight and input vectors respectively,
+        $\eta$ is a learning rate.
+
+        To compress an image using described algorithm, it should be divided to a sequence of
+        random, relatively small crops (e.g. 4x4 or 16x16). Such a sequence constructs training set,
+        and as a result of training Kohonen Network these crops are grouped into clusters.  To
+        compress an image it should be divided to chunks and these chunks should be treated as input
+        patterns and replaced by weights of the most activated neuron. When the network was trained
+        without normalization this substitution is enough. When weights and input
+        patterns are normalized, then pixel intensity information is lost and should be
+        remembered for each chunk during compression.
+    }
+
+    \section{Implementation} \label{implementation} {
+        Created program consists of two main modules. The first one is a pure Kohonen Network
+        implementation, the second one is responsible for an image compression. Ours Kohonen Network
+        can work in two modes - with and without normalization, which implies small differences in
+        implementation. When the network is created its weights are initialized and all the input
+        patterns are remembered for further training. If in \emph{normalize} mode, these two
+        matrices are normalized. To train a network its \emph{train\_step} method should be called
+        iteratively. Within this function single training step is proceed - for each input pattern
+        winner neuron is found and its weights are updated. Winner selection depends on the running
+        mode. If in \emph{normalize} mode, then dot product is calculated and the most activated
+        neuron is a winner. If not in \emph{normalize} mode, then euclidean distance to each neuron
+        is calculated and the nearest one is a winner. After that, dead neurons, which are not
+        modified for all the input patterns in a single training step, are randomly initialized.
+        Number of dead neurons and max winner weight's modification are remembered to defined stop
+        constraint. Our algorithm stops if there is no dead neurons and maximum winner weight's
+        modification is lower then $0.00001$ part of input patterns' min-max values range.
+        Optionally, if in \emph{normalize} mode, after each training step neurons' weights are
+        normalized.
+
+        To compress an image it is read into memory in a grayscale mode. Then given number of
+        random crops in given shape are extracted from the image. These random crops build dataset,
+        which Kohonen Network is trained on. After training process, given number of neurons is
+        available to use. Image is splitted into crops and each crop is replaced by weights of
+        neuron, which is the most activated in response to the image crop. This is how decompressed
+        image view is simulated. Additionally PSNR value and compression ratio are calculated.
+    }
+
+    \section{Experiments and results} \label{results} {
+        \ifthenelse{\boolean{is_karwowski}}
+        {\subfile{section/karwowski_results.tex}}
+        {\subfile{section/kowalewski_results.tex}}
+    }
+
+    \section{Summary and conclusions} \label{summary} {
+        \ifthenelse{\boolean{is_karwowski}}
+        {\subfile{section/karwowski_summary.tex}}
+        {\subfile{section/kowalewski_summary.tex}}
+    }
+
+    \begin{thebibliography}{0}
+        % @formatter:off
+        \bibitem{instruction}{Labolatory instruction, URL: https://ftims.edu.p.lodz.pl/pluginfile.php/75444/\\mod\_resource/content/1/soft\_comp\_lab\_05\_KOHONEN.pdf}
+        % @formatter:on
+    \end{thebibliography}
+
+\end{document}

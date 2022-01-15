@@ -1,0 +1,406 @@
+\documentclass[../EDI_Task2_Karwowski_Kowalewski.tex]{subfiles}
+
+\begin{document} {
+
+    \subsection{Przypadek 1 - bazowy} {
+
+        \begin{table}[!htbp]
+            \small
+            \centering
+            \begin{tabular}{|c|c|}
+                \hline
+                Parametr & Wartość \\ \hline
+                outputWordCounts & false \\ \hline
+                StopwordsHandler & false \\ \hline
+                TFTransform & false \\ \hline
+                IDFTransform & false \\ \hline
+            \end{tabular}
+            \caption{Wartości parametrów dla danej sekcji}
+%            \label{}
+        \end{table}
+        \FloatBarrier
+
+        \subsubsection{Analiza atrybutów} {
+
+            \begin{figure}[!htbp]
+                \centering
+                \includegraphics[width=\textwidth]{img/results2/weeia-case1.png}
+                \caption{Wyniki analizy atrybutów dla przypadku numer 1}
+%                \label{}
+            \end{figure}
+            \FloatBarrier
+        }
+
+        \subsubsection{Analiza klastrowa} {
+
+            \begin{table}[!htbp]
+                \small
+                \centering
+                \begin{tabular}{|c|c|}
+                    \hline
+                    Klaster & Wartość \\ \hline
+                    0   &  37 (69\%) \\
+                    1   &   9 (17\%) \\
+                    2   &   3 (6\%) \\
+                    3   &   5 (9\%) \\ \hline
+                \end{tabular}
+                \caption{Wynik klasteryzacji dla danej sekcji}
+%            \label{}
+            \end{table}
+            \FloatBarrier
+        }
+    }
+
+    \subsection{Przypadek 2 - outputWordCount} {
+
+        \begin{table}[!htbp]
+            \small
+            \centering
+            \begin{tabular}{|c|c|}
+                \hline
+                Parametr & Wartość \\ \hline
+                outputWordCounts & true \\ \hline
+                StopwordsHandler & false \\ \hline
+                TFTransform & false \\ \hline
+                IDFTransform & false \\ \hline
+            \end{tabular}
+            \caption{Wartości parametrów dla danej sekcji}
+%            \label{}
+        \end{table}
+        \FloatBarrier
+
+        \subsubsection{Analiza atrybutów} {
+
+            \begin{figure}[!htbp]
+                \centering
+                \includegraphics[width=\textwidth]{img/results2/weeia-case2.png}
+                \caption{Wyniki analizy atrybutów dla przypadku numer 2}
+%                \label{}
+            \end{figure}
+            \FloatBarrier
+        }
+
+        \subsubsection{Analiza klastrowa} {
+
+            \begin{table}[!htbp]
+                \small
+                \centering
+                \begin{tabular}{|c|c|}
+                    \hline
+                    Klaster & Wartość \\ \hline
+                    0    &   1 (2\%) \\
+                    1    &  38 (70\%) \\
+                    2    &   1 (2\%) \\
+                    4    &   3 (6\%) \\
+                    5    &   2 (4\%) \\
+                    6    &   1 (2\%) \\
+                    7    &   4 (7\%) \\
+                    8    &   1 (2\%) \\
+                    9    &   1 (2\%) \\
+                    10   &   1 (2\%) \\
+                    11   &   1 (2\%) \\ \hline
+                \end{tabular}
+                \caption{Wynik klasteryzacji dla danej sekcji}
+%            \label{}
+            \end{table}
+            \FloatBarrier
+        }
+    }
+
+    \subsection{Przypadek 3 - StopwordsHandler} {
+
+        \begin{table}[!htbp]
+            \small
+            \centering
+            \begin{tabular}{|c|c|}
+                \hline
+                Parametr & Wartość \\ \hline
+                outputWordCounts & false \\ \hline
+                StopwordsHandler & true \\ \hline
+                TFTransform & false \\ \hline
+                IDFTransform & false \\ \hline
+            \end{tabular}
+            \caption{Wartości parametrów dla danej sekcji}
+%            \label{}
+        \end{table}
+        \FloatBarrier
+
+        \subsubsection{Analiza atrybutów} {
+
+            \begin{figure}[!htbp]
+                \centering
+                \includegraphics[width=\textwidth]{img/results2/weeia-case3.png}
+                \caption{Wyniki analizy atrybutów dla przypadku numer 3}
+%                \label{}
+            \end{figure}
+            \FloatBarrier
+        }
+
+        \subsubsection{Analiza klastrowa} {
+
+            \begin{table}[!htbp]
+                \small
+                \centering
+                \begin{tabular}{|c|c|}
+                    \hline
+                    Klaster & Wartość \\ \hline
+                    0   &  40 (74\%) \\
+                    1   &   7 (13\%) \\
+                    2   &   2 (4\%) \\
+                    3   &   5 (9\%) \\ \hline
+                \end{tabular}
+                \caption{Wynik klasteryzacji dla danej sekcji}
+%            \label{}
+            \end{table}
+            \FloatBarrier
+        }
+    }
+
+    \subsection{Przypadek 4 - TFTransform} {
+
+        \begin{table}[!htbp]
+            \small
+            \centering
+            \begin{tabular}{|c|c|}
+                \hline
+                Parametr & Wartość \\ \hline
+                outputWordCounts & false \\ \hline
+                StopwordsHandler & false \\ \hline
+                TFTransform & true \\ \hline
+                IDFTransform & false \\ \hline
+            \end{tabular}
+            \caption{Wartości parametrów dla danej sekcji}
+%            \label{}
+        \end{table}
+        \FloatBarrier
+
+        \subsubsection{Analiza atrybutów} {
+
+            \begin{figure}[!htbp]
+                \centering
+                \includegraphics[width=\textwidth]{img/results2/weeia-case4.png}
+                \caption{Wyniki analizy atrybutów dla przypadku numer 4}
+%                \label{}
+            \end{figure}
+            \FloatBarrier
+        }
+
+        \subsubsection{Analiza klastrowa} {
+
+            \begin{table}[!htbp]
+                \small
+                \centering
+                \begin{tabular}{|c|c|}
+                    \hline
+                    Klaster & Wartość \\ \hline
+                    0   &   37 (69\%) \\
+                    1   &    9 (17\%) \\
+                    2   &    3 (6\%) \\
+                    3   &    5 (9\%) \\ \hline
+                \end{tabular}
+                \caption{Wynik klasteryzacji dla danej sekcji}
+%            \label{}
+            \end{table}
+            \FloatBarrier
+        }
+    }
+
+    \subsection{Przypadek 5 - IDFTransform} {
+
+        \begin{table}[!htbp]
+            \small
+            \centering
+            \begin{tabular}{|c|c|}
+                \hline
+                Parametr & Wartość \\ \hline
+                outputWordCounts & false \\ \hline
+                StopwordsHandler & false \\ \hline
+                TFTransform & false \\ \hline
+                IDFTransform & true \\ \hline
+            \end{tabular}
+            \caption{Wartości parametrów dla danej sekcji}
+%            \label{}
+        \end{table}
+        \FloatBarrier
+
+        \subsubsection{Analiza atrybutów} {
+
+            \begin{figure}[!htbp]
+                \centering
+                \includegraphics[width=\textwidth]{img/results2/weeia-case5.png}
+                \caption{Wyniki analizy atrybutów dla przypadku numer 5}
+%                \label{}
+            \end{figure}
+            \FloatBarrier
+        }
+
+        \subsubsection{Analiza klastrowa} {
+
+            \begin{table}[!htbp]
+                \small
+                \centering
+                \begin{tabular}{|c|c|}
+                    \hline
+                    Klaster & Wartość \\ \hline
+                    0   &   1 (2\%) \\
+                    1   &   2 (4\%) \\
+                    2   &   5 (9\%) \\
+                    3   &   3 (6\%) \\
+                    4   &  43 (80\%) \\ \hline
+                \end{tabular}
+                \caption{Wynik klasteryzacji dla danej sekcji}
+%            \label{}
+            \end{table}
+            \FloatBarrier
+        }
+    }
+
+    \subsection{Przypadek 6 - TFTransform i IDFTransform} {
+
+        \begin{table}[!htbp]
+            \small
+            \centering
+            \begin{tabular}{|c|c|}
+                \hline
+                Parametr & Wartość \\ \hline
+                outputWordCounts & false \\ \hline
+                StopwordsHandler & false \\ \hline
+                TFTransform & true \\ \hline
+                IDFTransform & true \\ \hline
+            \end{tabular}
+            \caption{Wartości parametrów dla danej sekcji}
+%            \label{}
+        \end{table}
+        \FloatBarrier
+
+        \subsubsection{Analiza atrybutów} {
+
+            \begin{figure}[!htbp]
+                \centering
+                \includegraphics[width=\textwidth]{img/results2/weeia-case6.png}
+                \caption{Wyniki analizy atrybutów dla przypadku numer 6}
+%                \label{}
+            \end{figure}
+            \FloatBarrier
+        }
+
+        \subsubsection{Analiza klastrowa} {
+
+            \begin{table}[!htbp]
+                \small
+                \centering
+                \begin{tabular}{|c|c|}
+                    \hline
+                    Klaster & Wartość \\ \hline
+                    0   &   1 (2\%) \\
+                    1   &   2 (4\%) \\
+                    2   &   5 (9\%) \\
+                    3   &   3 (6\%) \\
+                    4   &  43 (80\%) \\ \hline
+                \end{tabular}
+                \caption{Wynik klasteryzacji dla danej sekcji}
+%            \label{}
+            \end{table}
+            \FloatBarrier
+        }
+    }
+
+    \subsection{Przypadek 7 - TFTransform, IDFTransform i outputWordCounts} {
+
+        \begin{table}[!htbp]
+            \small
+            \centering
+            \begin{tabular}{|c|c|}
+                \hline
+                Parametr & Wartość \\ \hline
+                outputWordCounts & true \\ \hline
+                StopwordsHandler & false \\ \hline
+                TFTransform & true \\ \hline
+                IDFTransform & true \\ \hline
+            \end{tabular}
+            \caption{Wartości parametrów dla danej sekcji}
+%            \label{}
+        \end{table}
+        \FloatBarrier
+
+        \subsubsection{Analiza atrybutów} {
+
+            \begin{figure}[!htbp]
+                \centering
+                \includegraphics[width=\textwidth]{img/results2/weeia-case7.png}
+                \caption{Wyniki analizy atrybutów dla przypadku numer 7}
+%                \label{}
+            \end{figure}
+            \FloatBarrier
+        }
+
+        \subsubsection{Analiza klastrowa} {
+
+            \begin{table}[!htbp]
+                \small
+                \centering
+                \begin{tabular}{|c|c|}
+                    \hline
+                    Klaster & Wartość \\ \hline
+                    0   &   3 (6\%) \\
+                    1   &   1 (2\%) \\
+                    2   &   5 (9\%) \\
+                    3   &   2 (4\%) \\
+                    4   &  43 (80\%) \\ \hline
+                \end{tabular}
+                \caption{Wynik klasteryzacji dla danej sekcji}
+%            \label{}
+            \end{table}
+            \FloatBarrier
+        }
+    }
+
+    \subsection{Przypadek 8 - Reprezentacja binarna} {
+
+        \begin{table}[!htbp]
+            \small
+            \centering
+            \begin{tabular}{|c|c|}
+                \hline
+                Parametr & Wartość \\ \hline
+                outputWordCounts & false \\ \hline
+                StopwordsHandler & false \\ \hline
+                TFTransform & false \\ \hline
+                IDFTransform & false \\ \hline
+            \end{tabular}
+            \caption{Wartości parametrów dla danej sekcji}
+%            \label{}
+        \end{table}
+        \FloatBarrier
+
+        \subsubsection{Analiza atrybutów} {
+
+            \begin{figure}[!htbp]
+                \centering
+                \includegraphics[width=\textwidth]{img/results2/weeia-case8.png}
+                \caption{Wyniki analizy atrybutów dla przypadku numer 8}
+%                \label{}
+            \end{figure}
+            \FloatBarrier
+        }
+
+        \subsubsection{Analiza klastrowa} {
+
+            \begin{table}[!htbp]
+                \small
+                \centering
+                \begin{tabular}{|c|c|}
+                    \hline
+                    Klaster & Wartość \\ \hline
+                    0   &   2 (4\%) \\
+                    1   &   5 (9\%) \\
+                    2   &  47 (87\%) \\ \hline
+                \end{tabular}
+                \caption{Wynik klasteryzacji dla danej sekcji}
+%            \label{}
+            \end{table}
+            \FloatBarrier
+        }
+    }
+}
+\end{document}

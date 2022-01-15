@@ -1,0 +1,125 @@
+\documentclass{classrep}
+\usepackage[utf8]{inputenc}
+\frenchspacing
+
+\usepackage{graphicx}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage[hidelinks]{hyperref}
+\usepackage{lmodern}
+\usepackage{placeins}
+\usepackage{amsmath, amssymb, mathtools}
+\usepackage{listings}
+\usepackage{fancyhdr, lastpage}
+\usepackage{subfiles}
+\usepackage{times}
+
+% Ustawnienie spisu tresci aby rowniez zawieral \subsubsection
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\pagestyle{fancyplain}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\cfoot{\thepage\ / \pageref*{LastPage}}
+
+%--------------------------------------------------------------------------------------%
+\studycycle{Informatyka, studia dzienne, I st.}
+\coursesemester{VII}
+
+\coursename{Przedsiębiorczość i zarządzanie}
+\courseyear{2020/2021}
+
+\courseteacher{dr Anita Fajczak-Kowalska}
+\coursegroup{poniedziałek, 13:00}
+
+\author{
+    \studentinfo[216793@edu.p.lodz.pl]{Jan Karwowski}{216793}\\
+    \studentinfo[216806@edu.p.lodz.pl]{Kamil Kowalewski}{216806}
+}
+
+\title{\textbf{Smart Voice Access}\\ Inteligentna obsługa domofonu}
+
+\begin{document} {
+
+    \maketitle
+    \thispagestyle{fancyplain}
+
+    \null\newpage
+    \tableofcontents
+    \null\newpage
+
+    \section*{Streszczenie}
+    \label{chapter0:strzeszczenie} {
+        \subfile{section/section0.tex}
+    }
+
+    \section{Opis produktu}
+    \label{chapter1:opis_produktu} {
+        \subfile{section/section1.tex}
+    }
+
+    \section{Zespół zarządzający}
+    \label{chapter2:zespol_zarzadzajacy} {
+        \subfile{section/section2.tex}
+    }
+
+    \section{Rynek i konkurencja}
+    \label{chapter3:rynek_konkurecja} {
+        \subfile{section/section3.tex}
+    }
+
+    \section{Plan marketingowy}
+    \label{chapter4:plan_marketingowy} {
+        \subfile{section/section4.tex}
+    }
+
+    \section{System biznesowy i organizacja}
+    \label{chapter5:system_biznesowy} {
+        \subfile{section/section5.tex}
+    }
+
+    \section{Harmonogram realizacji}
+    \label{chapter6:harmonogram_realizacji} {
+        \subfile{section/section6.tex}
+    }
+
+    \section{Możliwości i zagrożenia}
+    \label{chapter7:mozliwosci_zagrozenia} {
+        \subfile{section/section7.tex}
+    }
+
+    \section{Analiza SWOT}
+    \label{chapter8:analiza_swot} {
+        \subfile{section/section8.tex}
+    }
+
+    \section{Plany finansowe}
+    \label{chapter9:plany_finansowe} {
+        \subfile{section/section9.tex}
+    }
+
+    \begin{thebibliography}{0}
+        \bibitem
+        {gospodarka_mieszkaniowa}
+        {https://stat.gov.pl/obszary-tematyczne/infrastruktura-komunalna
+        -nieruchomosci/nieruchomosci-budynki-infrastruktura-komunalna/gospodarka
+        -mieszkaniowa-w-2019-roku,14,3.html}
+
+        \bibitem
+        {tani_domofon}
+        {https://www.castorama.pl/unifon-analogowy-cyfral-ada-03c4-slim-czarno-bialy-id-98453.html}
+
+        \bibitem
+        {drogi_domofon}
+        {https://www.castorama.pl/wideodomofon-somfy-v300-bialy-id-1113094.html}
+
+        \bibitem
+        {facebook}
+        {https://www.facebook.com/}
+
+        \bibitem
+        {instagram}
+        {https://www.instagram.com/}
+    \end{thebibliography}
+}
+\end{document}

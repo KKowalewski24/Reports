@@ -1,0 +1,108 @@
+\documentclass[../EDI_Task1_Karwowski_Kowalewski.tex]{subfiles}
+
+\begin{document} {
+
+    Do odnalezienia reguł asocjacyjnych został użyty algorytm Apriori, który należy
+    do grupy algorytmów interacyjnych. Polega on na iteracyjnym wyszukiwaniu coraz
+    większych zbiorów elementów często występujących. Sam proces jest rozpoczynany
+    od znalezienia zbiorów jednoelementowych o odpowiednim wsparciu. W kolejnej
+    iteracji na ich podstawie są tworzone zbiory kandydujące dwuelementowe i na
+    podstawie ich wsparcia, gdy jest ono wystarczająco są tworzone zbiory
+    trójelementowe i proces iteracyjnie podążą dalej aż do stanu gdy nie da się
+    wygenerować kolejnych zbiorów kandydujących.
+
+    Algorytm ten został uruchomiony dwukrotnie. Po raz pierwszy dla całego pliku sesji,
+    gdzie wartości liczbowe zostały zdyskretyzowane. Po raz drugi tylko dla tych
+    atrybutów, które na początku miały wartości liczbowe ciągłe, a po dyskretyzacji
+    wartości dyskretne.
+
+    \begin{table}[!htbp]
+        \footnotesize
+        \centering
+        \begin{tabular}{|l|c|}
+            \hline
+            Parametr & Wartość \\ \hline
+            Minimum support & 0.95 (5120 instances) \\
+            Minimum metric <confidence> & 0.9 \\
+            Number of cycles performed & 1 \\
+            Size of set of large itemsets L(1) & 23 \\
+            Size of set of large itemsets L(2) & 103 \\
+            Size of set of large itemsets L(3) & 154 \\
+            Size of set of large itemsets L(4) & 82 \\
+            Size of set of large itemsets L(5) & 15 \\ \hline
+        \end{tabular}
+        \caption
+        {Parametry przebiegu algorytmu Apriori dla całego pliku sesji}
+        \label{apriori_params}
+    \end{table}
+
+    \begin{table}[!htbp]
+        \scriptsize
+        \centering
+        \begin{tabular}{|l|l|}
+            \hline
+            Jeśli & To \\ \hline
+            /facilities/tour.html=False 5248 & /images/=False 5235\\
+            /software/winvn/winvn.html=False /facilities/tour.html=False 5233 & /images/=False 5220\\
+            /facts/faq04.html=False /facilities/tour.html=False 5229 & /images/=False 5216\\
+            /facts/faq04.html=False /software/winvn/winvn.html=False /facilities/tour.html=False 5214 & /images/=False 5201\\
+            /facilities/tour.html=False /elv/elvpage.htm=False 5175 & /images/=False 5162\\
+            /software/winvn/winvn.html=False /facilities/tour.html=False /elv/elvpage.htm=False 5160 & /images/=False 5147\\
+            /facilities/tour.html=False /shuttle/missions/sts-69/images/images.html=False 5158 & /images/=False 5145\\
+            /facts/faq04.html=False /facilities/tour.html=False /elv/elvpage.htm=False 5157 & /images/=False 5144\\
+            /facilities/tour.html=False /shuttle/countdown/lps/fr.html=False 5149 & /images/=False 5136\\
+            /procurement/procurement.html=False /facilities/tour.html=False 5145 & /images/=False 5132\\ \hline
+        \end{tabular}
+        \caption
+        {Uzyskane reguły asocjacyjne dla całego pliku sesji}
+        \label{asociate_rules}
+    \end{table}
+    \FloatBarrier
+
+     \begin{table}[!htbp]
+        \footnotesize
+        \centering
+        \begin{tabular}{|l|c|}
+            \hline
+            Parametr & Wartość \\ \hline
+           Minimum support & 0.1 (539 instances) \\
+            Minimum metric <confidence> & 0.9 \\
+            Number of cycles performed & 18 \\
+            Size of set of large itemsets L(1) & 5 \\
+            Size of set of large itemsets L(2) & 6 \\
+            Size of set of large itemsets L(3) & 2 \\ \hline
+        \end{tabular}
+        \caption
+        {Parametry przebiegu algorytmu Apriori dla atrybutów liczbowych z pliku sesji}
+        \label{apriori_params_numeric}
+    \end{table}
+
+    \begin{table}[!htbp]
+        \footnotesize
+        \begin{enumerate}
+            \item requests\_count='(-inf-7.9]' average\_request\_duration='(-inf-59.9]' 1946 ==> duration='(-inf-709.8]' 1946 <conf:(1)>
+            \item requests\_count='(-inf-7.9]' average\_request\_duration='(59.9-119.8]' 1046 ==> duration='(-inf-709.8]' 1042 <conf:(1)>
+            \item average\_request\_duration='(-inf-59.9]' 2154 ==> duration='(-inf-709.8]' 2126 <conf:(0.99)>
+            \item duration='(-inf-709.8]' 4748 ==> requests\_count='(-inf-7.9]' 4474 <conf:(0.94)>
+            \item requests\_count='(-inf-7.9]' 4765 ==> duration='(-inf-709.8]' 4474 <conf:(0.94)>
+            \item duration='(-inf-709.8]' average\_request\_duration='(59.9-119.8]' 1136 ==> requests\_count='(-inf-7.9]' 1042 <conf:(0.92)>
+            \item duration='(-inf-709.8]' average\_request\_duration='(-inf-59.9]' 2126 ==> requests\_count='(-inf-7.9]' 1946 <conf:(0.92)>
+            \item average\_request\_duration='(-inf-59.9]' 2154 ==> requests\_count='(-inf-7.9]' 1946 <conf:(0.9)>
+            \item average\_request\_duration='(-inf-59.9]' 2154 ==> duration='(-inf-709.8]' requests\_count='(-inf-7.9]' 1946 <conf:(0.9)>
+        \end{enumerate}
+    \caption{Uzyskane reguły asocjacyjne dla atrybutów liczbowych z pliku sesji}
+    \end{table}
+    \FloatBarrier
+
+    Jak widać reguły asocjacyjne dla całego pliku sesji nie zawierają przydatnych
+    informacji. Wynika to z faktu, że w bardzo wielu sesjach można łatwo znaleźć
+    zależności, które są oparte na samych atrybutach flagowych. Jednakże tego typu
+    zależności nie niosą przydatnej informacji.
+
+    Inna sytuacja ma miejsce w przypadku szukania reguł asocjacyjnych dla samych danych
+    liczbowych (zdyskretyzowanych). Udało się tutaj znaleźć pewne interesujące zależności.
+    Przykładowo dla sesji składających z krótkim średnim czasem na stronie, czas całej
+    sesji też jest krótki - jest to zależność jak najbardziej logiczna. Inny przykład to,
+    że dla krótkich sesji mają one zazwyczaj mało zapytań.
+}
+\end{document}

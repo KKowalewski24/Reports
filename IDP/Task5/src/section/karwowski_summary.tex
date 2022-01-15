@@ -1,0 +1,35 @@
+\documentclass[../IDP_Task5_Karwowski_Kowalewski.tex]{subfiles}
+
+\begin{document} {
+    Figures \ref{fig:4x4_images}, \ref{fig:4x4_number_of_neurons} and
+    \ref{fig:4x4_compression_ratio} present results of the first series of experiments - related to
+    4x4 crop size. First of all, we can observe trivial dependency: when there is more neurons and
+    compression ratio is lower, then PSNR value increases. I.e. the more neurons we use the better
+    is quality of decompressed image - the information lost is lower. This dependency is visible in
+    all the three figures. More interesting observations include how exactly PSNR depends on number
+    of neurons. In the fig. \ref{fig:4x4_number_of_neurons} we can see that this is probably
+    exponentiall dependency - in higher neurons quantities there is no such a big impact on decoded
+    image quality. It is also visible in fig. \ref{fig:4x4_images}, only a few beginnig thumbnails
+    have very noticable quality lost in compare to the rest of them. On the other hand in fig.
+    \ref{fig:4x4_images} we can see that all these images have visible quality lost in compare to
+    the original image. Another observation is related to the shape of blue curve in fig.
+    \ref{fig:4x4_compression_ratio}. We can notice some kind of steps when PSNR value going down.
+    This behaviour is related to compression ratio calculation method - compression ratio depends on
+    number of bits required to save all necessary information. Using an extra bit when storing
+    compressed image results in possiblity of using many new ,,number of neurons'' values.
+
+    The second series of experiments is related to greater crop size - 8x8. Change of this paricular
+    parameter has a greate impact on image quality lost for the same number of neurons. In fig.
+    \ref{fig:8x8_number_of_neurons} and \ref{fig:8x8_compression_ratio} we can observe lower values
+    of PSNR in compare to the previous results. Also fig. \ref{fig:8x8_images} presents images,
+    which have noticable lower quality. On the other hand, using such a big crop size results in
+    much more compression ratio, as we can see in the plots. Another difference is that in fig.
+    \ref{fig:8x8_compression_ratio} we can not see such a big ,,steps'' as in fig.
+    \ref{fig:4x4_compression_ratio}. It is caused by the fact, that when new neuron is added then
+    memory, which is required to store compressed image, increases much more then in case of 4x4
+    crops, i.e. $8 \cdot 8 = 64$ new values have to be stored, instead of $4 \cdot 4 = 16$ new
+    values. It worth mentioning, that clusterizing image pixel space using 8x8 crop size is much
+    more time consuming. Except of these observations the second series of experiments is a source
+    of very similar conlusions to the first series.
+}
+\end{document}

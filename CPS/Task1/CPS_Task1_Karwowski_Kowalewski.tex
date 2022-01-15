@@ -1,0 +1,811 @@
+\documentclass[12pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[T1]{polski}
+\usepackage[cp1250]{inputenc}
+\newcommand{\BibTeX}{{\sc Bib}\TeX}
+\usepackage{graphicx}
+\usepackage{amsfonts}
+
+% OWN PACKAGE - VERY IMPORTANT %
+\usepackage{float}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setlength{\textheight}{21cm}
+
+
+\title{{\bf Zadanie nr 1 - Generacja sygna³u i szumu}\linebreak
+    Cyfrowe Przetwarzanie Sygna³ów}
+\author{Jan Karwowski 216793 \and Kamil Kowalewski 216806}
+\date{data oddania zadania 25.03.2020r}
+
+\begin{document}
+    \clearpage\maketitle
+    \thispagestyle{empty}
+    \newpage
+    \setcounter{page}{1}
+%--------------------------------------------------------------------------------------%
+    \section{Cel zadania} {
+        Celem zadania jest zapoznanie siê z wybranymi w³asnoœciami podstawowych rodzajów
+        sygna³ów. Nale¿a³o stworzyæ aplikacje z graficznym interfejsem u¿ytkownika
+        (wyœwietlanie wykresów i histogramów) do generowania sygna³u i szumu o parametrach
+        przedstawionych poni¿ej:
+        \begin{itemize}
+            \item szum o rozk³adzie jednostajnym;
+            \item szum gaussowski;
+            \item sygna³ sinusoidalny;
+            \item sygna³ sinusoidalny wyprostowany jednopo³ówkowo;
+            \item sygna³ sinusoidalny wyprostowany dwupo³ówkowo;
+            \item sygna³ prostok¹tny;
+            \item sygna³ prostok¹tny symetryczny;
+            \item sygna³ trójk¹tny;
+            \item skok jednostkowy;
+            \item impuls jednostkowy;
+            \item szum impulsowy;
+        \end{itemize}
+        oraz zapis i odczyt z pliku binarnego i wykonywanie dzia³añ na sygna³ach
+        przedstawionych poni¿ej:
+        \begin{itemize}
+            \item dodawanie;
+            \item odejmowanie;
+            \item mno¿enie;
+            \item dzielenie;
+        \end{itemize}
+    }
+%--------------------------------------------------------------------------------------%
+    \section{Wstêp teoretyczny} {
+        Na podstawie instrukcji ze strony przedmiotu~\cite{instrukcja} zosta³ opracowany program w jêzyku
+        Java, w wersji JDK 1.8~\cite{jdk} oraz przy pomocy zestawu narzêdzi JavaFX~\cite{javafx} do
+        tworzenia graficznym interfejsem u¿ytkownika. Do rysowania wykresów zosta³a u¿yta biblioteka
+        wbudowana w modu³ JavaFX aby zapewniæ spojnoœæ dzia³ania programu. Program zosta³ podzielony
+        na dwa g³owne pakiety - logic oraz view gdzie logic zawiera klasy modelu i logikê programu,
+        która wykonuje stosowne obliczenia natomiast pakiet view zawiera wszystkie elementy
+        zwi¹zane z interfejsem u¿ytkownika.\\
+
+        Zadaniem programu by³o równie¿ wyliczanie parametrów przedstawionych poni¿ej:
+        \begin{itemize}
+            \item {
+                Wartoœæ œrednia sygna³u:
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[width=0.65\textwidth]{img/wart-sred-sygn.png}
+                \end{figure}
+            }
+            \item {
+                Wartoœæ œrednia bezwzglêdna sygna³u:
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[width=0.65\textwidth]{img/wart-sred-bezwz-sygn.png}
+                \end{figure}
+            }
+            \item {
+                Wartoœæ skuteczna sygna³u:
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[width=0.7\textwidth]{img/wart-skut-sygn.png}
+                \end{figure}
+            }
+            \item {
+                Wariancja sygna³u:
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[width=0.7\textwidth]{img/waria-sygn.png}
+                \end{figure}
+            }
+            \item {
+                Moc œrednia sygna³u:
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[width=0.9\textwidth]{img/moc-sred-sygn.png}
+                \end{figure}
+            }
+        \end{itemize}
+
+        \subsection{Pe³ny interfejs u¿ytkownika} {
+
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=\textwidth]{img/interface/glowny-panel.png}
+                \caption{Pe³ny interfejs u¿ytkownika}
+            \end{figure}
+
+            Powy¿szy zrzut ekranu przedstawia panel interfejsu u¿ytkownika. Po lewej stronie
+            zosta³ umieszczony komponent odpowiedzialny za obs³ugê wykresów jak i doboru parametrów
+            generowanego wykresu. Po prawej stronie zosta³ umieszczony komponent odpowiedzialny za
+            wyœwietlanie wygenerowanych wekresów, histogramów oraz parametrów. Interfejs zapewnia
+            mo¿liwoœæ dodawanie dodatkowych kart. U samej góry okna aplikacji znajdujê siê pasek z
+            przyciskami do obs³ugi programu.
+        }
+
+        \subsection{Panel obs³ugi i wyboru parametrów} {
+            Panel obs³ugi posiada 3 karty, które poprzez nacisniecie myszy mo¿na prze³¹czaæ.
+            Pierwsza z nich oznaczona jako Generowanie odpowiada za wybór parametrów generowanego
+            wykresu, druga oznaczona jako Operacje pozwala na wybór operacji np. dodawanie, mno¿enie,
+            zaœ trzecia oznaczona jako Obs³uga Plików odpowiada za zapis i odczyt z pliku.
+
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=0.5\textwidth]{img/interface/parametry.png}
+                \caption{Panel wyboru parametrów}
+            \end{figure}
+
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=0.5\textwidth]{img/interface/operacje.png}
+                \caption{Panel wyboru operacji}
+            \end{figure}
+
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=0.5\textwidth]{img/interface/obsluga-pliku.png}
+                \caption{Panel obs³ugi plików}
+            \end{figure}
+
+        }
+
+        \subsection{Panel wyników} {
+            Panel wyników sk³ada siê z pojedyñczej karty, która zawiera 3 karty oznaczone kolejno
+            Wykres, Histogram oraz Parametry. Na karcie Wykres zostaje wyswietlony wygenerowany
+            wykres, na karcie Histogram zostaje wyœwietlony wygenerowany histogram natomiast na
+            karcie Parametry zostaj¹ wyœwietlone parametry wykresu np. Wartoœæ œrednia sygna³u.
+            Program zapewnia mo¿liwoœæ dodawania nowej karty, która zawiera opisane powy¿ej podkarty.
+
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=0.7\textwidth]{img/interface/wykres.png}
+                \caption{Karta wykresu}
+            \end{figure}
+
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=0.7\textwidth]{img/interface/histogram.png}
+                \caption{Karta histogramu}
+            \end{figure}
+
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=0.7\textwidth]{img/interface/parametry-wykresu.png}
+                \caption{Karta wyliczonych parametrów}
+            \end{figure}
+        }
+        \newpage
+%--------------------------------------------------------------------------------------%
+        \section{Eksperymenty i wyniki} {
+
+            \subsection{Szum o rozk³adzie jednostajnym} \label{szumjednostajny} {
+                Celem eksperymentu by³o wygenerowanie szumu o rozk³adzie jednostajnym o wybranych parametrach,
+                które zosta³y opisane w sekcji za³o¿enia.
+
+                \subsubsection{Za³o¿enia} {
+                    Wykresy zosta³y wygenerowane przy losowe wartoœci z zakresu \[<-A_{max}, A_{max}>\]
+                    z jednakowym prawdopodobieñstwem
+
+                    Parametry:
+                    \begin{itemize}
+                        \item Amplituda: 1
+                        \item Czas pocz¹tkowy: 0s
+                        \item Czas trwania sygna³u: 5s
+                    \end{itemize}
+                }
+
+                \subsubsection{Rezultat} {
+
+                    \begin{figure}[H]
+                        \centering
+                        \includegraphics[width=0.8\textwidth]{img/result/szum-jednost/wykres.png}
+                        \caption{Wykres}
+                    \end{figure}
+
+                    \begin{figure}[H]
+                        \centering
+                        \includegraphics[width=0.8\textwidth]{img/result/szum-jednost/hist.png}
+                        \caption{Histogram}
+                    \end{figure}
+
+                    Wyliczone parametry:
+                    \begin{itemize}
+                        \item Wartoœæ œrednia sygna³u: 0.0217
+                        \item Wartoœæ œrednia bezwzglêdna sygna³u: 0.5016
+                        \item Wartoœæ skuteczna sygna³u: 0.5773
+                        \item Wariancja sygna³u: 0.3328
+                        \item Moc œrednia sygna³u: 0.3333
+                    \end{itemize}
+                }
+            }
+            \newpage
+
+            \subsection{Szum gaussowski} \label{szumgaussowski} {
+                Celem eksperymentu by³o wygenerowanie szumu gaussowskiego o wybranych parametrach,
+                które zosta³y opisane w sekcji za³o¿enia. Funkcja opisuj¹ca sygna³:
+
+                \begin{figure}[!htbp]
+                    \centering
+                    \includegraphics[width=0.5\textwidth]{img/szumgauss.png}
+                \end{figure}
+
+                \subsubsection{Za³o¿enia} {
+                    Wartoœci parametrów u¿ytych do wygenerowania sygna³u:
+                    \begin{itemize}
+                        \item Amplituda: 1
+                        \item Czas pocz¹tkowy: 0s
+                        \item Czas trwania sygna³u: 5s
+                    \end{itemize}
+                }
+
+                \subsubsection{Rezultat} {
+
+                    \begin{figure}[H]
+                        \centering
+                        \includegraphics[width=0.8\textwidth]{img/result/szum-gauss/wykres.png}
+                        \caption{Wykres}
+                    \end{figure}
+
+                    \begin{figure}[H]
+                        \centering
+                        \includegraphics[width=0.8\textwidth]{img/result/szum-gauss/hist.png}
+                        \caption{Histogram}
+                    \end{figure}
+
+                    Wyliczone parametry:
+                    \begin{itemize}
+                        \item Wartoœæ œrednia sygna³u: -1.0521
+                        \item Wartoœæ œrednia bezwzglêdna sygna³u: 1.7672
+                        \item Wartoœæ skuteczna sygna³u: 2.1975
+                        \item Wariancja sygna³u: 3.7222
+                        \item Moc œrednia sygna³u: 4.8291
+                    \end{itemize}
+                }
+            }
+            \newpage
+
+            \subsection{Sygna³ sinusoidalny} \label{sinus} {
+                Celem eksperymentu by³o wygenerowanie sygna³u sinusoidalnego o wybranych parametrach,
+                które zosta³y opisane w sekcji za³o¿enia. Funkcja opisuj¹ca sygna³:
+
+                \begin{figure}[!htbp]
+                    \centering
+                    \includegraphics[width=0.3\textwidth]{img/sinus.png}
+                \end{figure}
+
+                \subsubsection{Za³o¿enia} {
+                    Wartoœci parametrów u¿ytych do wygenerowania sygna³u:
+                    \begin{itemize}
+                        \item Aplituda: 1
+                        \item Czas pocz¹tkowy: 0s
+                        \item Czas trwania sygna³u: 4s
+                        \item Okres: 1s
+                    \end{itemize}
+                }
+
+                \subsubsection{Rezultat} {
+
+                    \begin{figure}[H]
+                        \centering
+                        \includegraphics[width=0.8\textwidth]{img/result/sinus/wykres.png}
+                        \caption{Wykres}
+                    \end{figure}
+
+                    \begin{figure}[H]
+                        \centering
+                        \includegraphics[width=0.8\textwidth]{img/result/sinus/hist.png}
+                        \caption{Histogram}
+                    \end{figure}
+
+                    Wyliczone parametry:
+                    \begin{itemize}
+                        \item Wartoœæ œrednia sygna³u: 0
+                        \item Wartoœæ œrednia bezwzglêdna sygna³u: 0.636
+                        \item Wartoœæ skuteczna sygna³u: 0.7068
+                        \item Wariancja sygna³u: 0.4995
+                        \item Moc œrednia sygna³u: 0.4995
+                    \end{itemize}
+                }
+            }
+            \newpage
+
+            \subsection{Sygna³ sinusoidalny wyprostowany jednopo³ówkowo} \label{sinusjednopolowkowy} {
+                Celem eksperymentu by³o wygenerowanie sygna³u sinusoidalnego wyprostowanego jednopo³ówkowo o wybranych parametrach,
+                które zosta³y opisane w sekcji za³o¿enia. Funkcja opisuj¹ca sygna³:
+
+                \begin{figure}[!htbp]
+                    \centering
+                    \includegraphics[width=0.5\textwidth]{img/sinusjedno.png}
+                \end{figure}
+
+                \subsubsection{Za³o¿enia} {
+                    Wartoœci parametrów u¿ytych do wygenerowania sygna³u:
+                    \begin{itemize}
+                        \item Aplituda: 1
+                        \item Czas pocz¹tkowy: 0s
+                        \item Czas trwania sygna³u: 4s
+                        \item Okres: 1s
+                    \end{itemize}
+                }
+
+                \subsubsection{Rezultat} {
+
+                    \begin{figure}[H]
+                        \centering
+                        \includegraphics[width=0.8\textwidth]{img/result/sinus-jedno/wykres.png}
+                        \caption{Wykres}
+                    \end{figure}
+
+                    \begin{figure}[H]
+                        \centering
+                        \includegraphics[width=0.8\textwidth]{img/result/sinus-jedno/hist.png}
+                        \caption{Histogram}
+                    \end{figure}
+
+                    Wyliczone parametry:
+                    \begin{itemize}
+                        \item Wartoœæ œrednia sygna³u: 0.318
+                        \item Wartoœæ œrednia bezwzglêdna sygna³u: 0.318
+                        \item Wartoœæ skuteczna sygna³u: 0.4997
+                        \item Wariancja sygna³u: 0.1486
+                        \item Moc œrednia sygna³u: 0.2497
+                    \end{itemize}
+                }
+            }
+            \newpage
+
+            \subsection{Sygna³ sinusoidalny wyprostowany dwupo³ówkowo} \label{sinusdwupolowkowy} {
+                Celem eksperymentu by³o wygenerowanie sygna³u sinusoidalnego wyprostowanego dwupo³ówkowo o wybranych parametrach,
+                które zosta³y opisane w sekcji za³o¿enia. Funkcja opisuj¹ca sygna³:
+
+                \begin{figure}[!htbp]
+                    \centering
+                    \includegraphics[width=0.6\textwidth]{img/sinusdwu.png}
+                \end{figure}
+
+                \subsubsection{Za³o¿enia} {
+                    Wartoœci parametrów u¿ytych do wygenerowania sygna³u:
+                    \begin{itemize}
+                        \item Aplituda: 1
+                        \item Czas pocz¹tkowy: 0s
+                        \item Czas trwania sygna³u: 4s
+                        \item Okres: 1s
+                    \end{itemize}
+                }
+
+                \subsubsection{Rezultat} {
+
+                    \begin{figure}[H]
+                        \centering
+                        \includegraphics[width=0.75\textwidth]{img/result/sinus-dwu/wykres.png}
+                        \caption{Wykres}
+                    \end{figure}
+
+                    \begin{figure}[H]
+                        \centering
+                        \includegraphics[width=0.75\textwidth]{img/result/sinus-dwu/hist.png}
+                        \caption{Histogram}
+                    \end{figure}
+
+                    Wyliczone parametry:
+                    \begin{itemize}
+                        \item Wartoœæ œrednia sygna³u: 0.636
+                        \item Wartoœæ œrednia bezwzglêdna sygna³u: 0.636
+                        \item Wartoœæ skuteczna sygna³u: 0.7068
+                        \item Wariancja sygna³u: 0.095
+                        \item Moc œrednia sygna³u: 0.4995
+                    \end{itemize}
+                }
+            }
+            \newpage
+
+            \subsection{Sygna³ prostok¹tny} \label{prostokat} {
+                Celem eksperymentu by³o wygenerowanie sygna³u prostok¹tnego o wybranych parametrach,
+                które zosta³y opisane w sekcji za³o¿enia. Funkcja opisuj¹ca sygna³:
+
+                \begin{figure}[!htbp]
+                    \centering
+                    \includegraphics[width=0.7\textwidth]{img/prostokat.png}
+                \end{figure}
+
+                \subsubsection{Za³o¿enia} {
+                    Wartoœci parametrów u¿ytych do wygenerowania sygna³u:
+                    \begin{itemize}
+                        \item Aplituda: -1
+                        \item Czas pocz¹tkowy: 0s
+                        \item Czas trwania sygna³u: 4s
+                        \item Okres: 1s
+                        \item Wspó³czynnik wype³nienia: 0.25
+                    \end{itemize}
+                }
+
+                \subsubsection{Rezultat} {
+
+                    \begin{figure}[H]
+                        \centering
+                        \includegraphics[width=0.7\textwidth]{img/result/prost/wykres.png}
+                        \caption{Wykres}
+                    \end{figure}
+
+                    \begin{figure}[H]
+                        \centering
+                        \includegraphics[width=0.7\textwidth]{img/result/prost/hist.png}
+                        \caption{Histogram}
+                    \end{figure}
+
+                    Wyliczone parametry:
+                    \begin{itemize}
+                        \item Wartoœæ œrednia sygna³u: -0.251
+                        \item Wartoœæ œrednia bezwzglêdna sygna³u: 0.251
+                        \item Wartoœæ skuteczna sygna³u: 0.501
+                        \item Wariancja sygna³u: 0.188
+                        \item Moc œrednia sygna³u: 0.251
+                    \end{itemize}
+                }
+            }
+            \newpage
+
+            \subsection{Sygna³ prostok¹tny symetryczny} \label{prostokatsymetryczny} {
+                Celem eksperymentu by³o wygenerowanie sygna³u prostok¹tnego symetryczne o wybranych parametrach,
+                które zosta³y opisane w sekcji za³o¿enia. Funkcja opisuj¹ca sygna³:
+
+                \begin{figure}[!htbp]
+                    \centering
+                    \includegraphics[width=0.7\textwidth]{img/prostokatsymet.png}
+                \end{figure}
+
+                \subsubsection{Za³o¿enia} {
+                    Wartoœci parametrów u¿ytych do wygenerowania sygna³u:
+                    \begin{itemize}
+                        \item Aplituda: -1
+                        \item Czas pocz¹tkowy: 0s
+                        \item Czas trwania sygna³u: 4s
+                        \item Okres: 1s
+                        \item Wspó³czynnik wype³nienia: 0.25
+                    \end{itemize}
+                }
+
+                \subsubsection{Rezultat} {
+
+                    \begin{figure}[H]
+                        \centering
+                        \includegraphics[width=0.7\textwidth]{img/result/prost-symet/wykres.png}
+                        \caption{Wykres}
+                    \end{figure}
+
+                    \begin{figure}[H]
+                        \centering
+                        \includegraphics[width=0.7\textwidth]{img/result/prost-symet/hist.png}
+                        \caption{Histogram}
+                    \end{figure}
+
+                    Wyliczone parametry:
+                    \begin{itemize}
+                        \item Wartoœæ œrednia sygna³u: 0.498
+                        \item Wartoœæ œrednia bezwzglêdna sygna³u: 1
+                        \item Wartoœæ skuteczna sygna³u: 1
+                        \item Wariancja sygna³u: 0.752
+                        \item Moc œrednia sygna³u: 1
+                    \end{itemize}
+                }
+            }
+            \newpage
+
+            \subsection{Sygna³ trójk¹tny} \label{trojkat} {
+                Celem eksperymentu by³o wygenerowanie sygna³u trójk¹tnego o wybranych parametrach,
+                które zosta³y opisane w sekcji za³o¿enia. Funkcja opisuj¹ca sygna³:
+
+                \begin{figure}[!htbp]
+                    \centering
+                    \includegraphics[width=0.7\textwidth]{img/trojkat.png}
+                \end{figure}
+
+                \subsubsection{Za³o¿enia} {
+                    Wartoœci parametrów u¿ytych do wygenerowania sygna³u:
+                    \begin{itemize}
+                        \item Aplituda: 1
+                        \item Czas pocz¹tkowy: 0s
+                        \item Czas trwania sygna³u: 4s
+                        \item Okres: 1s
+                        \item Wspó³czynnik wype³nienia: 0.5
+                    \end{itemize}
+                }
+
+                \subsubsection{Rezultat} {
+
+                    \begin{figure}[H]
+                        \centering
+                        \includegraphics[width=0.65\textwidth]{img/result/trojk/wykres.png}
+                        \caption{Wykres}
+                    \end{figure}
+
+                    \begin{figure}[H]
+                        \centering
+                        \includegraphics[width=0.65\textwidth]{img/result/trojk/hist.png}
+                        \caption{Histogram}
+                    \end{figure}
+
+                    Wyliczone parametry:
+                    \begin{itemize}
+                        \item Wartoœæ œrednia sygna³u: 0.4995
+                        \item Wartoœæ œrednia bezwzglêdna sygna³u: 0.4995
+                        \item Wartoœæ skuteczna sygna³u: 0.5771
+                        \item Wariancja sygna³u: 0.0835
+                        \item Moc œrednia sygna³u: 0.333
+                    \end{itemize}
+                }
+            }
+            \newpage
+
+            \subsection{Skok jednostkowy} \label{skokjednostowy} {
+                Celem eksperymentu by³o wygenerowanie skoku jednostkowego o wybranych parametrach,
+                które zosta³y opisane w sekcji za³o¿enia. Funkcja opisuj¹ca sygna³:
+
+                \begin{figure}[!htbp]
+                    \centering
+                    \includegraphics[width=0.5\textwidth]{img/skokjednostowy.png}
+                \end{figure}
+
+                \subsubsection{Za³o¿enia} {
+                    Wartoœci parametrów u¿ytych do wygenerowania sygna³u:
+                    \begin{itemize}
+                        \item Amplituda: 1
+                        \item Czas pocz¹tkowy: 0s
+                        \item Czas trwania sygna³u: 4s
+                        \item Czas skoku: 1s
+                    \end{itemize}
+                }
+
+                \subsubsection{Rezultat} {
+
+                    \begin{figure}[H]
+                        \centering
+                        \includegraphics[width=0.7\textwidth]{img/result/skok-jednost/wykres.png}
+                        \caption{Wykres}
+                    \end{figure}
+
+                    \begin{figure}[H]
+                        \centering
+                        \includegraphics[width=0.7\textwidth]{img/result/skok-jednost/hist.png}
+                        \caption{Histogram}
+                    \end{figure}
+
+                    Wyliczone parametry:
+                    \begin{itemize}
+                        \item Wartoœæ œrednia sygna³u: 0.75
+                        \item Wartoœæ œrednia bezwzglêdna sygna³u: 0.75
+                        \item Wartoœæ skuteczna sygna³u: 0.866
+                        \item Wariancja sygna³u: 0.1875
+                        \item Moc œrednia sygna³u: 0.75
+                    \end{itemize}
+                }
+            }
+            \newpage
+
+            \subsection{Impuls jednostkowy} \label{impulsjednostowy} {
+                Celem eksperymentu by³o wygenerowanie impulsu jednostkowego o wybranych parametrach,
+                które zosta³y opisane w sekcji za³o¿enia. Funkcja opisuj¹ca sygna³:
+
+                \begin{figure}[!htbp]
+                    \centering
+                    \includegraphics[width=0.3\textwidth]{img/impuls-jednostkowy.png}
+                \end{figure}
+
+                \subsubsection{Za³o¿enia} {
+                    Wartoœci parametrów u¿ytych do wygenerowania sygna³u:
+                    \begin{itemize}
+                        \item Aplituda: 1
+                        \item Czas pocz¹tkowy: 0s
+                        \item Czas trwania sygna³u: 4s
+                        \item Czêstotliwoœæ próbkowania: 16
+                        \item Number próbki skoku: 10
+                    \end{itemize}
+                }
+
+                \subsubsection{Rezultat} {
+
+                    \begin{figure}[H]
+                        \centering
+                        \includegraphics[width=0.7\textwidth]{img/result/impuls-jednost/wykres.png}
+                        \caption{Wykres}
+                    \end{figure}
+
+                    \begin{figure}[H]
+                        \centering
+                        \includegraphics[width=0.7\textwidth]{img/result/impuls-jednost/hist.png}
+                        \caption{Histogram}
+                    \end{figure}
+
+                    Wyliczone parametry:
+                    \begin{itemize}
+                        \item Wartoœæ œrednia sygna³u: 0.0156
+                        \item Wartoœæ œrednia bezwzglêdna sygna³u: 0.0156
+                        \item Wartoœæ skuteczna sygna³u: 0.125
+                        \item Wariancja sygna³u: 0.0154
+                        \item Moc œrednia sygna³u: 0.0156
+                    \end{itemize}
+                }
+            }
+            \newpage
+
+            \subsection{Szum implusowy} \label{impuls} {
+                Celem eksperymentu by³o wygenerowanie szumu impulsowego o wybranych parametrach,
+                które zosta³y opisane w sekcji za³o¿enia.
+
+                \subsubsection{Za³o¿enia} {
+                    \begin{itemize}
+                        \item Aplituda: 1
+                        \item Czas pocz¹tkowy: 0s
+                        \item Czas trwania sygna³u: 4s
+                        \item Czêstotliwoœæ próbkowania: 16
+                        \item Prawdopodobieñstwo: 0.5
+                    \end{itemize}
+                }
+
+                \subsubsection{Rezultat} {
+
+                    \begin{figure}[H]
+                        \centering
+                        \includegraphics[width=0.8\textwidth]{img/result/szum-implus/wykres.png}
+                        \caption{Wykres}
+                    \end{figure}
+
+                    \begin{figure}[H]
+                        \centering
+                        \includegraphics[width=0.8\textwidth]{img/result/szum-implus/hist.png}
+                        \caption{Histogram}
+                    \end{figure}
+
+                    Wyliczone parametry:
+                    \begin{itemize}
+                        \item Wartoœæ œrednia sygna³u: 0.5469
+                        \item Wartoœæ œrednia bezwzglêdna sygna³u: 0.5469
+                        \item Wartoœæ skuteczna sygna³u: 0.7395
+                        \item Wariancja sygna³u: 0.2478
+                        \item Moc œrednia sygna³u: 0.5469
+                    \end{itemize}
+                }
+            }
+            \newpage
+
+            \subsection{Dodawanie sygna³ów} {
+                Celem eksperymentu by³o dodanie sygna³ów, które zosta³y opisane w sekcji za³o¿enia
+
+                \subsubsection{Za³o¿enia} {
+                    Parametry wykresów zosta³y okreœlone w eksperymencie |\ref{prostokat}| oraz |\ref{trojkat}|
+                }
+
+                \subsubsection{Rezultat} {
+
+                    \begin{figure}[H]
+                        \centering
+                        \includegraphics[width=0.9\textwidth]{img/result/dodawanie/wykres.png}
+                        \caption{Wykres}
+                    \end{figure}
+
+                    \begin{figure}[H]
+                        \centering
+                        \includegraphics[width=0.9\textwidth]{img/result/dodawanie/hist.png}
+                        \caption{Histogram}
+                    \end{figure}
+
+                    Wyliczone parametry:
+                    \begin{itemize}
+                        \item Wartoœæ œrednia sygna³u: 0.2485
+                        \item Wartoœæ œrednia bezwzglêdna sygna³u: 0.6259
+                        \item Wartoœæ skuteczna sygna³u: 0.6778
+                        \item Wariancja sygna³u: 0.3976
+                        \item Moc œrednia sygna³u: 0.4594
+                    \end{itemize}
+                }
+            }
+            \newpage
+
+            \subsection{Odejmowanie sygna³ów} {
+                Celem eksperymentu by³o odejmowanie sygna³ów, które zosta³y opisane w sekcji za³o¿enia
+
+                \subsubsection{Za³o¿enia} {
+                    Parametry wykresów zosta³y okreœlone w eksperymencie |\ref{prostokat}| oraz |\ref{trojkat}|
+                }
+
+                \subsubsection{Rezultat} {
+
+                    \begin{figure}[H]
+                        \centering
+                        \includegraphics[width=0.9\textwidth]{img/result/odejmowanie/wykres.png}
+                        \caption{Wykres}
+                    \end{figure}
+
+                    \begin{figure}[H]
+                        \centering
+                        \includegraphics[width=0.9\textwidth]{img/result/odejmowanie/hist.png}
+                        \caption{Odejmowanie}
+                    \end{figure}
+
+                    Wyliczone parametry:
+                    \begin{itemize}
+                        \item Wartoœæ œrednia sygna³u: -0.7505
+                        \item Wartoœæ œrednia bezwzglêdna sygna³u: 0.7505
+                        \item Wartoœæ skuteczna sygna³u: 0.8418
+                        \item Wariancja sygna³u: 0.1454
+                        \item Moc œrednia sygna³u: 0.7086
+                    \end{itemize}
+                }
+            }
+            \newpage
+
+            \subsection{Mno¿enie sygna³ów} {
+                Celem eksperymentu by³o mno¿enie sygna³ów, które zosta³y opisane w sekcji za³o¿enia
+
+                \subsubsection{Za³o¿enia} {
+                    Parametry wykresów zosta³y okreœlone w eksperymencie |\ref{prostokat}| oraz |\ref{trojkat}|
+                }
+
+                \subsubsection{Rezultat} {
+
+                    \begin{figure}[H]
+                        \centering
+                        \includegraphics[width=0.9\textwidth]{img/result/mnozenie/wykres.png}
+                        \caption{Wykres}
+                    \end{figure}
+
+                    \begin{figure}[H]
+                        \centering
+                        \includegraphics[width=0.9\textwidth]{img/result/mnozenie/hist.png}
+                        \caption{Histogram}
+                    \end{figure}
+
+                    Wyliczone parametry:
+                    \begin{itemize}
+                        \item Wartoœæ œrednia sygna³u:-0.0623
+                        \item Wartoœæ œrednia bezwzglêdna sygna³u: 0.0623
+                        \item Wartoœæ skuteczna sygna³u: 0.144
+                        \item Wariancja sygna³u: 0.0169
+                        \item Moc œrednia sygna³u: 0.0207
+                    \end{itemize}
+                }
+            }
+            \newpage
+
+            \subsection{Dzielenie sygna³ów} {
+                Celem eksperymentu by³o dzielenie sygna³ów, które zosta³y opisane w sekcji za³o¿enia
+
+                \subsubsection{Za³o¿enia} {
+                    Parametry wykresów zosta³y okreœlone w eksperymencie |\ref{szumjednostajny}| oraz |\ref{szumgaussowski}|
+                }
+
+                \subsubsection{Rezultat} {
+
+                    \begin{figure}[H]
+                        \centering
+                        \includegraphics[width=0.9\textwidth]{img/result/dzielenie/wykres.png}
+                        \caption{Wykres}
+                    \end{figure}
+
+                    \begin{figure}[H]
+                        \centering
+                        \includegraphics[width=0.9\textwidth]{img/result/dzielenie/hist.png}
+                        \caption{Histogram}
+                    \end{figure}
+
+                    Wyliczone parametry:
+                    \begin{itemize}
+                        \item Wartoœæ œrednia sygna³u: -0.4927
+                        \item Wartoœæ œrednia bezwzglêdna sygna³u: 3.5546
+                        \item Wartoœæ skuteczna sygna³u: 12.1569
+                        \item Wariancja sygna³u: 147.5482
+                        \item Moc œrednia sygna³u: 147.791
+                    \end{itemize}
+                }
+            }
+            \newpage
+        }
+%--------------------------------------------------------------------------------------%
+        \section{Wnioski} {
+            Program zosta³ stworzony zgodnie ze specyfikacj¹ przedstawion¹ w intrukcji co za
+            tym idzie sposób jej dzia³ania jest zgodny z za³o¿eniami projektu i pozwala
+            w poprawny sposób generowaæ sygna³y, wykonywaæ na niej operacje oraz zapewnia
+            mo¿liwoœæ zapisu jak i odczytu wygenerowanych wykresów przez program.\\
+            W czasie projektowania oraz implementacji programu dbaliœmy aby kod programu
+            by³ na tyle rozszerzalny i elastyczny aby móg³ przyj¹æ nowe funkcjonalnoœæ
+            z nastêpnych zadañ.
+        }
+%--------------------------------------------------------------------------------------%
+        \renewcommand\refname{Bibliografia}
+        \bibliographystyle{plain}
+        \bibliography{bibliografia_wzor}
+
+\end{document}

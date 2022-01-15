@@ -1,0 +1,8 @@
+.idea
+out
+auxil
+*.aux
+*.log
+*.out
+*.pdf
+*.gz

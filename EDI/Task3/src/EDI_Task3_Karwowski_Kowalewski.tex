@@ -1,0 +1,189 @@
+\documentclass{classrep}
+\usepackage[utf8]{inputenc}
+\frenchspacing
+
+\usepackage{graphicx}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage[hidelinks]{hyperref}
+\usepackage{lmodern}
+\usepackage{placeins}
+\usepackage{url}
+\usepackage{amsmath, amssymb, mathtools}
+\usepackage{listings}
+\usepackage{fancyhdr, lastpage}
+\usepackage{subfiles}
+
+\pagestyle{fancyplain}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\cfoot{\thepage\ / \pageref*{LastPage}}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+%--------------------------------------------------------------------------------------%
+\studycycle{Informatyka stosowana, studia dzienne, II st.}
+\coursesemester{II}
+
+\coursename{Eksploracja danych internetowych}
+\courseyear{2021/2022}
+
+\courseteacher{dr inż. Krzysztof Myszkorowski}
+\coursegroup{poniedziałek, 12:15}
+
+\author{%
+    \studentinfo[239671@edu.p.lodz.pl]{Jan Karwowski}{239671}\\
+    \studentinfo[239676@edu.p.lodz.pl]{Kamil Kowalewski}{239676}\\
+}
+
+\title{Zadanie 3.: System rekomendacji stron internetowych}
+
+\begin{document}
+    \maketitle
+    \thispagestyle{fancyplain}
+
+    \tableofcontents
+    \newpage
+
+    \section{Cel} {
+        Celem zadania było przeprowadzenie rekomendacji stron internetowych, które
+        powinien odwiedzic losowo wygenerowany użytkownik. Sam system działa na
+        podstawie analizy aktywności innych użytkowników, dzięki której jest w stanie
+        zarekomendować strony dla danego użytkownika.
+    }
+
+    \section{Zbiór danych}
+    \label{dataset_description} {
+        Do tego zadania został wykorzystany zbiór danych przygotowany uprzednio do
+        zadania numer 1. Jest on zbudowany na podstawione cytowanego zbioru danych
+        \cite{dataset}, poprzez dokonanie wyodrebniania sesji i użytkowników. W tym
+        przypadku został wykorzystany plik o nazwie \textit{extracted\_user\_pages.arff}.
+        Zawiera on użytkowników i flagi odwiedzonych stron, jego wiersze sterujące
+        zostały przedstawione poniżej:
+    % @formatter:off
+        \begin{lstlisting}
+@relation extracted_user_pages
+@attribute /ksc.html {True, False}
+@attribute / {True, False}
+@attribute /shuttle/countdown/ {True, False}
+@attribute /shuttle/missions/missions.html {True, False}
+@attribute /shuttle/missions/sts-69/mission-sts-69.html {True, False}
+@attribute /htbin/cdt_main.pl {True, False}
+@attribute /finance/main.htm {True, False}
+@attribute /shuttle/countdown/liftoff.html {True, False}
+@attribute /history/history.html {True, False}
+@attribute /history/apollo/apollo.html {True, False}
+@attribute /history/apollo/apollo-13/apollo-13.html {True, False}
+@attribute /shuttle/missions/sts-70/mission-sts-70.html {True, False}
+@attribute /shuttle/missions/sts-71/mission-sts-71.html {True, False}
+@attribute /shuttle/missions/sts-71/images/images.html {True, False}
+@attribute /shuttle/technology/sts-newsref/stsref-toc.html {True, False}
+@attribute /htbin/cdt_clock.pl {True, False}
+@attribute /shuttle/countdown/countdown.html {True, False}
+@attribute /facilities/lc39a.html {True, False}
+@attribute /shuttle/missions/sts-70/images/images.html {True, False}
+@attribute /history/apollo/apollo-13/apollo-13-info.html {True, False}
+@attribute /procurement/procurement.html {True, False}
+@attribute /shuttle/missions/sts-71/movies/movies.html {True, False}
+@attribute /shuttle/technology/sts-newsref/sts_asm.html {True, False}
+@attribute /history/apollo/apollo-11/apollo-11.html {True, False}
+@attribute /facts/faq04.html {True, False}
+@attribute /htbin/wais.pl {True, False}
+@attribute /shuttle/missions/sts-70/movies/movies.html {True, False}
+@attribute /images/ {True, False}
+@attribute /shuttle/resources/orbiters/endeavour.html {True, False}
+@attribute /shuttle/missions/sts-73/mission-sts-73.html {True, False}
+@attribute /whats-new.html {True, False}
+@attribute /software/winvn/winvn.html {True, False}
+@attribute /facilities/tour.html {True, False}
+@attribute /elv/elvpage.htm {True, False}
+@attribute /shuttle/missions/sts-69/images/images.html {True, False}
+@attribute /shuttle/countdown/lps/fr.html {True, False}
+        \end{lstlisting}
+    % @formatter:on
+    }
+
+    \section{Opis metody} {
+        Na pliku \textit{extracted\_user\_pages.arff} opisanym w sekcji
+        \ref{dataset_description} została wykonana klasteryzacja w programie
+        Weka\cite{weka} przy pomocy algorytmu K-średnich (ang. K-Means) analogicznie
+        jak w przypadku zadania pierwszego. W tym przypadku wykonaliśmy to dla trzech
+        wartości parametru \emph{K} a mianowicie \emph{K=4}, \emph{K=7}, \emph{K=10}.
+
+        W programie użytkownik jest reprezentowany jako wektor zawierające wartości
+        typu Boolean czyli \emph{True} albo \emph{False}. Wartości te reprezentują czy
+        poszczególne strony zostały przez niego odwiedzone.
+
+        Do wyliczania podobieństwa użytkownika do poszczególnych grup został
+        wykorzystany współczynnik podobieństwa Jaccarda, jego wzór został przedstawiony
+        poniżej:
+
+        $$
+        J(A, B) = \frac{|A \cap B|}{|A \cup B|}
+        $$
+
+        gdzie w przypadku tej metody \emph{A} oznacza zbiór stron odwiedzonych przez
+        użytkownika natomiast \emph{B} to zbiór zawierający strony odwiedzone przez
+        większość użytkowników danego klastra. Na podstawie wyliczonej wartości należy
+        wybrać ten klaster gdzie wartość jest najbliższa wartości~\emph{1} ponieważ
+        wartość~\emph{1} oznacza identyność zbiorów.
+    }
+
+    \section{Wyniki}
+    \label{results} {
+        \subfile{section/results.tex}
+    }
+
+    \section{Dyskusja} {
+        Ze względu na dosyć specyficzny rozkład danych, większość ze stron nie została
+        odwiedzona przez żadnego użytkownika. Potwierdzeniem tego jest fakt, że
+        najbardziej liczny klaster dla wyników w sekcji \ref{results} zawiera wszystkie
+        flagi ustawione na wartość \textit{False}. W przypadku wyników dla sekcji
+        \ref{results_k_4} oraz \ref{results_k_7} pozostałe klastry cechowały się
+        zerowym dopasowaniem natomiast dla sekcji \ref{results_k_10} udało się uzyskać
+        dopasowanie z zakresu \textit{0.06} a \textit{0.07}. Niestety są to klastry
+        bardzo mało liczne i jest to poziom od \textit{1\%} do \textit{2\%}. Ze względu
+        na małą różnorodność uzyskano niskie wartości współczynnika podobnieństwa
+        Jaccarda.
+        Można pokusić się o teorię, że zwiększenie liczby klastrów do 10 poprawiło
+        wyniki natomiast nadal przez obciążenie oraz rozkład danych w tym zbiorze
+        wyniki nie są znakomite. Kolejną sprawą jaka miała wpływ na wyniki jest wybrany
+        użytkownik, został on przed rozpoczęciem eksperymentów wygenerowany losowo i
+        użyty do wszystkich eksperymentów. Możliwe, że przy innej losowej konfiguracji
+        flag stron jakie odwiedził użytkownik wyniki były lepsze. Co warto wspomnieć w
+        czasie implementowania systemu rekomendacyjnego był on testowany i np dla
+        użytkownika, który za każdym razem był losowo generowany dla 3 wcześniej
+        wspomnianych wartości udawało się uzyskać znacznie lepsze wyniki ale tylko dla
+        danej liczby klastrów i po wykorzystaniu tego użytkownika dla innej liczby
+        klastrów wyniki wychodziły bardzo słabe tzn. nie odnajdywało rekomendowanych
+        stron a współczynnik podobieństwa Jaccarda był bardzo niski.
+    }
+
+    \begin{thebibliography}{0}
+        \bibitem{dataset}{https://ftims.edu.p.lodz.pl/mod/folder/view.php?id=97337}
+        \bibitem{weka}{https://www.cs.waikato.ac.nz/ml/weka/}
+    \end{thebibliography}
+
+\end{document}
